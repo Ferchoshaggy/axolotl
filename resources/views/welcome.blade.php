@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>AXOLOTL</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background: #191e24">
     <div class="container-fluid fixed-top p-4">
         <div class="col-12">
             <div class="d-flex justify-content-end">
