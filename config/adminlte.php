@@ -46,9 +46,9 @@ return [
     |
     */
 
-    'logo' => 'AXOLOTLx',
-    'logo_img' => 'logos/logo.png',
-    'logo_img_class' => 'brand-image elevation-7 fluid',
+    'logo' => 'AXOLOTL SOTFWARE',
+    'logo_img' => 'logos/axo.png',
+    'logo_img_class' => 'brand-image-xs elevation-9',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AXOLOTL',
@@ -245,42 +245,42 @@ return [
         [
             'text' => 'Avance',
             'url'  => '#',
-            'icon' => 'fa-line-chart',
+            'icon' => 'fas fa-check-square',
         ],
         [
             'text' => 'Matriz Master',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
+            'icon' => 'fas fa-location-arrow',
         ],
         [
             'text' => 'Check list',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
+            'icon' => 'fas fa-list',
         ],
         [
             'text' => 'Documentos',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
+            'icon' => 'fas fa-folder',
         ],
         [
             'text' => 'Grabaciones',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
+            'icon' => 'fas fa-step-forward',
         ],
         [
             'text' => 'UX',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
+            'icon' => 'fas fa-sitemap',
         ],
         [
             'text' => 'UI',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
+            'icon' => 'fas fa-paint-brush',
         ],
         [
             'text' => 'Presupuesto',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => '#',
+            'icon' => 'fas fa-credit-card',
         ],
        
     ],
