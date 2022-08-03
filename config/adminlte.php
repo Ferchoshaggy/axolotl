@@ -249,7 +249,7 @@ return [
         ],
         [
             'text' => 'Matriz Master',
-            'url'  => '#',
+            'route'  => 'matriz',
             'icon' => 'fas fa-location-arrow',
         ],
         [
@@ -259,27 +259,27 @@ return [
         ],
         [
             'text' => 'Documentos',
-            'url'  => '#',
+            'route'  => 'documentos',
             'icon' => 'fas fa-folder',
         ],
         [
             'text' => 'Grabaciones',
-            'url'  => '#',
+            'route'  => 'videos',
             'icon' => 'fas fa-step-forward',
         ],
         [
             'text' => 'UX',
-            'url'  => '#',
+            'route'  => 'ux',
             'icon' => 'fas fa-sitemap',
         ],
         [
             'text' => 'UI',
-            'url'  => '#',
+            'route'  => 'ui',
             'icon' => 'fas fa-paint-brush',
         ],
         [
             'text' => 'Presupuesto',
-            'url'  => '#',
+            'route'  => 'presupuesto',
             'icon' => 'fas fa-credit-card',
         ],
        
