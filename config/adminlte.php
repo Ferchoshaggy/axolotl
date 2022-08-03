@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'logo' => 'AXOLOTL SOTFWARE',
+    'logo' => '<b>AXOLOTL</b> SOTFWARE',
     'logo_img' => 'logos/axo.png',
     'logo_img_class' => 'brand-image-xs elevation-9',
     'logo_img_xl' => null,
