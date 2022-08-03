@@ -35,12 +35,67 @@
         </div>
 <div style="display:flex; justify-content:flex-end; margin:2% 0 0 70%;">
 
-    <button class="form-control btn btn-primary" style="margin:0 0 0 4%;">Calcular</button>
+    <button class="form-control btn btn-primary" data-toggle="modal" data-target="#ModalPresupuesto" style="margin:0 0 0 4%;">Calcular</button>
     <button class="form-control btn btn-info" style="margin:0 0 0 4%; background:orange; color:white">PDF</button>
 
 </div>
 
     </div>
+</div>
+
+<!-- Modal Nuevo UI-->
+<div class="modal fade bd-example-modal-lg" id="ModalPresupuesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Presupuesto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<div class="row">
+  <div class="col-md-3">
+<label for="costo">Costo Por Sprint</label>
+<input type="number" name="costo" class="form-control">
+  </div>
+  <div class="col-md-3">
+    <label for="integrantes">Numero de Integrantes</label>
+    <input type="number" name="integrantes" class="form-control">
+  </div>
+  <div class="col-md-3">
+    <label for="semanas">Semanas de trabajo</label>
+    <input type="number" name="semanas" class="form-control">
+  </div>
+  <div class="col-md-3">
+    <label for="sprints">Numero de sprint's</label>
+    <input type="number" name="sprints" class="form-control">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+  <label for="Egreso">Egreso</label>
+  <input type="number" name="egreso" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label for="concepto">Concepto del Egreso</label>
+    <input type="text" name="concepto" class="form-control">
+  </div>
+  <div class="col-md-3">
+    <label style="visibility: hidden">--</label>
+    <button type="button" class="btn btn-success form-control">Agregar</button>
+  </div>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
+        <button type="button" class="btn btn-primary">Actualizar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @stop

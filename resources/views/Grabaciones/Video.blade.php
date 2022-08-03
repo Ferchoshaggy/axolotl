@@ -40,11 +40,50 @@
         </div>
 <div style="display:flex; justify-content:flex-end; margin:2% 0 0 85%;">
 
-    <button class="form-control btn btn-primary" style="margin:0 0 0 4%;">Nuevo</button>
+    <button class="form-control btn btn-primary" data-toggle="modal" data-target="#ModalGrabaciones" style="margin:0 0 0 4%;">Nuevo</button>
 
 </div>
 
     </div>
+</div>
+
+<!-- Modal Nuevo Grabaciones -->
+<div class="modal fade bd-example-modal-lg" id="ModalGrabaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nueva Grabacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<div class="row">
+  <div class="col-md-4">
+<label for="link">Link</label>
+<input type="text" name="link" class="form-control">
+  </div>
+  <div class="col-md-4">
+    <label for="Fecha">Fecha de Grabacion</label>
+    <input type="date" name="fecha" class="form-control">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+  <label for="Descripcion">Descripcion</label>
+  <textarea name="Descripcion" class="form-control"></textarea>
+  </div>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @stop
