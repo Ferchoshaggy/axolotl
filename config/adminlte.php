@@ -245,42 +245,42 @@ return [
         [
             'text' => 'Avance',
             'url'  => '#',
-            'icon' => 'fas fa-check-square',
+            'icon' => 'fas fa-fw fa-chart-line',
         ],
         [
             'text' => 'Matriz Master',
             'route'  => 'matriz',
-            'icon' => 'fas fa-location-arrow',
+            'icon' => 'fas fa-fw fa-hourglass-half',
         ],
         [
             'text' => 'Check list',
             'url'  => '/Check_List',
-            'icon' => 'fas fa-list',
+            'icon' => 'fas fa-fw fa-list',
         ],
         [
             'text' => 'Documentos',
             'route'  => 'documentos',
-            'icon' => 'fas fa-folder',
+            'icon' => 'fas fa-fw fa-folder',
         ],
         [
             'text' => 'Grabaciones',
             'route'  => 'videos',
-            'icon' => 'fas fa-step-forward',
+            'icon' => 'fas fa-fw fa-step-forward',
         ],
         [
             'text' => 'UX',
             'route'  => 'ux',
-            'icon' => 'fas fa-sitemap',
+            'icon' => 'fas fa-fw fa-sitemap',
         ],
         [
             'text' => 'UI',
             'route'  => 'ui',
-            'icon' => 'fas fa-paint-brush',
+            'icon' => 'fas fa-fw fa-paint-brush',
         ],
         [
             'text' => 'Presupuesto',
             'route'  => 'presupuesto',
-            'icon' => 'fas fa-credit-card',
+            'icon' => 'fas fa-fw fa-credit-card',
         ],
        
     ],
