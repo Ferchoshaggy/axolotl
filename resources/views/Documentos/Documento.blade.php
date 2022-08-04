@@ -11,6 +11,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
+
+
 @stop
 @section('content')
 
@@ -40,7 +42,7 @@
         </div>
 <div style="display:flex; justify-content:flex-end; margin:2% 0 0 85%;">
 
-    <button class="form-control btn btn-primary" data-toggle="modal" data-target="#ModalDocumento" style="margin:0 0 0 4%;">Nuevo</button>
+    <button class="form-control btn btn-primary" data-toggle="modal" data-target="#ModalDocumento" style="margin:0 0 0 5%;">Nuevo</button>
 
 </div>
 
@@ -69,16 +71,23 @@
   </div>
   <div class="col-md-4">
     <label for="documento">Documento</label>
-    <input type="file" name="documento" class="form-control" >
+    <label class="btn btn-default btn-sm center-block btn-file form-control" style="background: rgb(226, 94, 134);">
+      <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+      <input type="file" name="archivo" style="display: none;">
+    </label>
   </div>
+</div>
 
-
-
+<div class="row">
+  <div class="col-md-12">
+  <label for="Descripcion">Descripcion</label>
+  <textarea name="Descripcion" class="form-control"></textarea>
+  </div>
 </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
         <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>

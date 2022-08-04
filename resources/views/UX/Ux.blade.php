@@ -40,11 +40,57 @@
         </div>
 <div style="display:flex; justify-content:flex-end; margin:2% 0 0 85%;">
 
-    <button class="form-control btn btn-primary" style="margin:0 0 0 4%;">Nuevo</button>
+    <button class="form-control btn btn-primary" data-toggle="modal" data-target="#ModalUX" style="margin:0 0 0 4%;">Nuevo</button>
 
 </div>
 
     </div>
+</div>
+
+<!-- Modal Nuevo UX -->
+<div class="modal fade bd-example-modal-lg" id="ModalUX" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Nuevo Documento de UX</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<div class="row">
+  <div class="col-md-4">
+<label for="Nombre">Nombre</label>
+<input type="text" name="nombre" class="form-control">
+  </div>
+  <div class="col-md-4">
+    <label for="clave">Clave</label>
+    <input type="text" name="clave" class="form-control">
+  </div>
+  <div class="col-md-4">
+    <label for="algo" style="visibility: hidden">-</label>
+    <label class="btn btn-default btn-sm center-block btn-file form-control" style="background: rgb(226, 94, 134);">
+      <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+      <input type="file" name="archivo" style="display: none;">
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+  <label for="Descripcion">Descripcion</label>
+  <textarea name="Descripcion" class="form-control"></textarea>
+  </div>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @stop
