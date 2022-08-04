@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tipo_user'
     ];
 
     /**
@@ -58,4 +59,35 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    //esta es para la imagen
+    public function adminlte_image(){
+
+        if($this->foto==null){
+            return "https://picsum.photos/300/300";
+        }else{
+            return "fotos_users\\".$this->foto;
+        }
+    }
+
+    public function adminlte_desc(){
+
+        //odtenemos el dato de la tabla de ese usuario, para saber que tipo de usuario es
+
+        if($this->tipo_user==0){
+
+            return "ADMINISTRADOR";
+
+        }elseif($this->tipo_user==1){
+
+            return "GERENTE";
+
+        }
+
+
+    }
+
+    public function adminlte_profile_url(){
+        return '/Config_user';
+    }
 }
