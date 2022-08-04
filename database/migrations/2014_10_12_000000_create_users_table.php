@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer("edad")->nullable();
             $table->string("direccion")->nullable();
             $table->integer('tipo_user')->nullable();
+            $table->integer('id_proyecto_select')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
