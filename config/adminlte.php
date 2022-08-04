@@ -48,7 +48,7 @@ return [
 
     'logo' => 'AXOLOTL SOTFWARE',
     'logo_img' => 'logos/axo.png',
-    'logo_img_class' => 'brand-image-xs elevation-9',
+    'logo_img_class' => 'brand-image-xl img-circle elevation-9',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AXOLOTL',
