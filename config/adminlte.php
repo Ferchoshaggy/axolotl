@@ -31,7 +31,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -46,9 +46,9 @@ return [
     |
     */
 
-    'logo' => '<b>AXOLOTL</b> SOTFWARE',
+    'logo' => '<b>AXOLOTL</b> <span style="font-size: 12px; position: absolute; top: 38px; left: 73px;">SOFTWARE</span>',
     'logo_img' => 'logos/axo.png',
-    'logo_img_class' => 'brand-image-xl img-circle elevation-9',
+    'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AXOLOTL',
@@ -235,7 +235,7 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'BUSCAR',
         ],
         [
             'text' => 'blog',
@@ -254,7 +254,7 @@ return [
         ],
         [
             'text' => 'Check list',
-            'url'  => '/Check_List',
+            'route'  => 'check_list',
             'icon' => 'fas fa-fw fa-list',
         ],
         [

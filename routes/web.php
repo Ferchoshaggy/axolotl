@@ -10,6 +10,7 @@ use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\UIController;
 use App\Http\Controllers\UXController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashController;
 
 
 
@@ -29,16 +30,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dash', function () {
-        return view('dash.index');
-    })->name('dash')->middleware("auth");
-});
 
+
+//dash
+Route::get('/dash', [DashController::class,'vista_dash'])->name('vista_dash');
+Route::post('/guardar_proyecto', [DashController::class,'guardar_proyecto'])->name('guardar_proyecto');
 
 //usuario config
 Route::get('/Config_user', [UserController::class,'vista_user_edit'])->name('edit_user');

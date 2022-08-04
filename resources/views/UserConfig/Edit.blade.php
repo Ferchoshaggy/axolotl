@@ -121,7 +121,7 @@
             
             <div class="col-md-4" style="margin-bottom: 10px;">
               <label>EDAD</label>
-              <input type="number" name="edad" class="form-control" placeholder="EDAD USUARIO" min="10" required value="{{$dato->edad}}">
+              <input type="number" name="edad" class="form-control" placeholder="minima de 10" min="10" required value="{{$dato->edad}}">
             </div>
             <div class="col-md-8" style="margin-bottom: 10px;">
               <label>DIRECCIÓN</label>

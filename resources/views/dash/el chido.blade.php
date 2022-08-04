@@ -23,7 +23,6 @@
 </style>
 
 @if(Session::has('message'))
-<br>
 <div class="alert alert-{{ Session::get('color') }}" role="alert" style="font-weight: bold;">
    {{ Session::get('message') }}
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -31,40 +30,6 @@
   </button>
 </div>
 @endif
-
-<!-- modal para la info de segir la gia-->
-@if(Session::get('message')!=null)
-
-<button  class="btn btn-primary" data-toggle="modal" data-target="#info_mas_modal" style="display: none;" id="info_mas" onclick="alerta_sonido();"></button>
-<div class="modal fade" id="info_mas_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLongTitle">INFO</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="text-align: center;">
-        <p style="color: black; white-space: pre-wrap; font-weight: bold; font-size: 35px;">SE GUARDO CON EXITO</p><br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn boton_rosa" data-dismiss="modal">ACEPTAR</button>
-      </div>
-    </div>
-  </div>
-</div>
-@else
-<button  class="btn btn-primary" data-toggle="modal" data-target="#info_mas_modal" style="display: none;" id="info_mas"></button>
-@endif
-
-<script type="text/javascript">
-    //este es para que suene el sonido
-  let sonido=new Audio("{{url('/SD_ALERT_27.mp3')}}");
-  function alerta_sonido(){
-      sonido.play();
-  }
-</script>
 
 <div class="card-body">
     <div style="text-align : center; ">
@@ -136,35 +101,35 @@
             <div class="row">
                 <div class="col-md-3" style="margin-bottom: 10px;">
                     <label>NOMBRE PROYECTO</label>
-                    <input type="text" name="nombre_proyecto" id="nombre_proyecto" class="form-control" onchange="activar_primero();" onkeyup="activar_primero();">
+                    <input type="text" name="nombre_proyecto" class="form-control">
                 </div>
                 <div class="col-md-3"  style="margin-bottom: 10px;">
                     <label>FECHA ENTREGA</label>
-                    <input type="date" name="fecha_entrega" id="fecha_entrega" class="form-control" onchange="activar_primero();" onkeyup="activar_primero();">
+                    <input type="date" name="fecha_entrega" class="form-control">
                 </div>
                 <div class="col-md-3"  style="margin-bottom: 10px;">
                     <label>NOMBRE CLIENTE</label>
-                    <input type="text" name="cliente" id="cliente" class="form-control" onchange="activar_primero();" onkeyup="activar_primero();">
+                    <input type="text" name="cliente" class="form-control">
                 </div>
                 <div class="col-md-3"  style="margin-bottom: 10px;">
                     <label>CONTACTO</label>
-                    <input type="text" name="contacto" id="contacto" class="form-control" onchange="activar_primero();" onkeyup="activar_primero();">
+                    <input type="text" name="contacto" class="form-control">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12"  style="margin-bottom: 10px;">
                     <label>DESCRIPCIÓN</label>
-                    <textarea class="form-control" name="description_proyecto" id="description_proyecto" onchange="activar_primero();" onkeyup="activar_primero();"></textarea>
+                    <textarea class="form-control" name="description_proyecto"></textarea>
                 </div>
                 <div class="col-md-3"  style="margin-bottom: 10px;">
                     <label>NUMERO DE MODULOS</label>
-                    <input type="number" name="numero_modulos" class="form-control" min="1" id="modulos_numero" onchange="activar_primero();" onkeyup="activar_primero();">
+                    <input type="number" name="numero_modulos" class="form-control" min="1" id="modulos_numero">
                 </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCELAR</button>
-            <button type="button" class="btn boton_rosa" data-dismiss="modal" data-toggle="modal" data-target="#modulos" onclick="agregar_modulos(Number(document.getElementById('modulos_numero').value)-1);" id="paso_1" disabled>SIGUIENTE</button>
+            <button type="button" class="btn boton_rosa" data-dismiss="modal" data-toggle="modal" data-target="#modulos" onclick="agregar_modulos(Number(document.getElementById('modulos_numero').value)-1);">SIGUIENTE</button>
           </div>
         </div>
       </div>
@@ -188,21 +153,21 @@
                         <div class="row">
                             <div class="col-md-3" style="margin-bottom: 10px;">
                                 <label>NOMBRE DEL MODULO</label>
-                                <input type="text" name="nombre_modulos[]" class="form-control" id="nombre_modulos[]" onkeypress="return event.charCode!=32" onpaste="return false" placeholder="NO SE ACEPTAN ESPACIOS" onchange="activar_segundo();" onkeyup="activar_segundo();">
+                                <input type="text" name="nombre_modulos[]" class="form-control" id="nombre_modulos[]" onkeypress="return event.charCode!=32" onpaste="return false" placeholder="NO SE ACEPTAN ESPACIOS">
                             </div>
                             <div class="col-md-3"  style="margin-bottom: 10px;">
                                 <label>NUMERO DE SPRINT´S</label>
-                                <input type="number" name="numero_sprints[]" class="form-control" min="1" id="numero_sprints[]" onchange="activar_segundo();" onkeyup="activar_segundo();">
+                                <input type="number" name="numero_sprints[]" class="form-control" min="1" id="numero_sprints[]">
                             </div>
                             <div class="col-md-3"  style="margin-bottom: 10px;">
-                                <button type="button" class="btn btn-success" style="margin-top: 30px;" onclick="agregar_modulos(1); activar_segundo();">AGREGAR</button>
+                                <button type="button" class="btn btn-success" style="margin-top: 30px;" onclick="agregar_modulos(1);">AGREGAR</button>
                             </div>
                             
                         </div>
                         <div class="row">
                             <div class="col-md-12"  style="margin-bottom: 10px;">
                                 <label>DESCRIPCIÓN</label>
-                                <textarea class="form-control" name="description_modulos[]" id="description_modulos[]" onchange="activar_segundo();" onkeyup="activar_segundo();"></textarea>
+                                <textarea class="form-control" name="description_modulos[]"></textarea>
                             </div>
                         </div>
                         
@@ -213,7 +178,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrar_dinamic_edit()">CANCELAR</button>
-            <button type="button" class="btn boton_rosa" data-dismiss="modal" data-toggle="modal" data-target="#sprints" onclick="agregar_sprint_boton();" id="paso_2" disabled>SIGUIENTE</button>
+            <button type="button" class="btn boton_rosa" data-dismiss="modal" data-toggle="modal" data-target="#sprints" onclick="agregar_sprint_boton();">SIGUIENTE</button>
           </div>
         </div>
       </div>
@@ -242,7 +207,7 @@
                             </div>
                             <div class="col-md-3" style="margin-bottom: 10px;">
                                 <label>NOMBRE DEL SPRINT´S</label>
-                                <input type="text" name="nombre_sprints[]" id="nombre_sprints[]" class="form-control">
+                                <input type="text" name="nombre_sprints[]" class="form-control">
                             </div>
                             <div class="col-md-3"  style="margin-bottom: 10px;">
                                 <button type="button" class="btn btn-success" style="margin-top: 30px;">AGREGAR</button>
@@ -252,7 +217,7 @@
                         <div class="row">
                             <div class="col-md-12"  style="margin-bottom: 10px;">
                                 <label>DESCRIPCIÓN</label>
-                                <textarea class="form-control" name="description_sprint[]" id="description_sprint[]"></textarea>
+                                <textarea class="form-control" name="description_sprint[]"></textarea>
                             </div>
                         </div>
                         
@@ -264,7 +229,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="borrar_sprints_dinamicos();">CANCELAR</button>
-            <button class="btn boton_rosa" disabled id="paso_3">GUARDAR</button>
+            <button class="btn boton_rosa" disabled>GUARDAR</button>
           </div>
         </div>
       </div>
@@ -281,40 +246,6 @@
 @section('js')
 
 <script type="text/javascript">
-
-    $(document).ready(function() {
-        //este activa el modal de info, si no hay mensaje de guardado entonces no hace nada.
-        document.getElementById("info_mas").click();
-    });
-
-    function activar_primero(){
-        if(document.getElementById("nombre_proyecto").value!=""  && document.getElementById("fecha_entrega").value!="" && document.getElementById("cliente").value!="" && document.getElementById("contacto").value!="" && document.getElementById("description_proyecto").value!="" && document.getElementById("modulos_numero").value>=1){
-            $('#paso_1').prop('disabled', false);
-        }else{
-             $('#paso_1').prop('disabled', true);
-        }
-    }
-
-    function activar_segundo(){
-        for(var i=0;i<$("input[id='nombre_modulos[]']").length;i++){
-            if($("input[id='nombre_modulos[]']")[i].value!="" && $("input[id='numero_sprints[]']")[i].value>=1 && $("textarea[id='description_modulos[]']")[i].value!=""){
-                $('#paso_2').prop('disabled', false);
-            }else{
-                 $('#paso_2').prop('disabled', true);
-            }
-        }
-    }
-    function activar_tercero(){
-        for(var i=0;i<$("input[id='nombre_modulos[]']").length;i++){
-            for(var j=0;j<$("input[id='nombre_sprints_"+$("input[id='nombre_modulos[]']")[i].value+"[]']").length;j++){
-                if($("input[id='nombre_sprints_"+$("input[id='nombre_modulos[]']")[i].value+"[]']")[j].value!="" && $("textarea[id='description_sprint_"+$("input[id='nombre_modulos[]']")[i].value+"[]']")[j].value!=""){
-                    $('#paso_3').prop('disabled', false);
-                }else{
-                     $('#paso_3').prop('disabled', true);
-                }
-            }
-        }
-    }
     var j=1;
 
     function agregar_modulos(numero){
@@ -322,7 +253,7 @@
         for(var i=0;i<numero;i++){
 
             if(j>0){
-                $("#dynamic_field").append('<tr id="fila_a'+j+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL MODULO</label><input type="text" name="nombre_modulos[]" id="nombre_modulos[]" class="form-control" onkeypress="return event.charCode!=32" onpaste="return false" placeholder="NO SE ACEPTAN ESPACIOS" onchange="activar_segundo();" onkeyup="activar_segundo();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><label>NUMERO DE SPRINT´S</label><input type="number" name="numero_sprints[]" id="numero_sprints[]" class="form-control" min="1" onchange="activar_segundo();" onkeyup="activar_segundo();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger remove_1" id="'+j+'" style="margin-top: 30px;" onclick="activar_segundo();">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_modulos[]" onchange="activar_segundo();" onkeyup="activar_segundo();" id="description_modulos[]"></textarea></div></div></td></tr>');
+                $("#dynamic_field").append('<tr id="fila_a'+j+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL MODULO</label><input type="text" name="nombre_modulos[]" id="nombre_modulos[]" class="form-control" onkeypress="return event.charCode!=32" onpaste="return false" placeholder="NO SE ACEPTAN ESPACIOS"></div><div class="col-md-3"  style="margin-bottom: 10px;"><label>NUMERO DE SPRINT´S</label><input type="number" name="numero_sprints[]" id="numero_sprints[]" class="form-control" min="1"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger remove_1" id="'+j+'" style="margin-top: 30px;">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_modulos[]"></textarea></div></div></td></tr>');
                 j++;
 
             }
@@ -346,19 +277,19 @@
 
             //inicializamos el contador de numero de esprint
             sprint_contador_por_modulo[i]=1;
-            for( var m=0;m<numero_sprint_modulo[i];m++){
+            for( var m=0;m<numero_sprint_modulo[i]-1;m++){
 
-                if(m==0){
+                if(sprint_contador_por_modulo[i]==1){
                     $("#contenedor_tablas").append('<table id="dynamic_field_'+$("input[id='nombre_modulos[]']")[i].value+'" style="background-color: transparent; width: 100%; height: 100%;"></table>');
 
-                    $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[i].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[i].value+sprint_contador_por_modulo[i]+'"><td><div class="row"><div class="col-md-12" style="text-align: center; font-size: 20px;"><label style="font-weight: bold;">MODULO: <label style="font-weight: bold; color: red;">'+$("input[id='nombre_modulos[]']")[i].value+'</label></label></div><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" class="form-control" onchange="activar_tercero();" onkeyup="activar_tercero();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-success" style="margin-top: 30px;" onclick="agregar_sprint_boton_interno('+i+'); activar_tercero();">AGREGAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" onchange="activar_tercero();" onkeyup="activar_tercero();"></textarea></div></div></td></tr>');
+                    $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[i].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[i].value+sprint_contador_por_modulo[i]+'"><td><div class="row"><div class="col-md-12" style="text-align: center; font-size: 20px;"><label style="font-weight: bold;">MODULO: <label style="font-weight: bold; color: red;">'+$("input[id='nombre_modulos[]']")[i].value+'</label></label></div><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" class="form-control"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-success" style="margin-top: 30px;" onclick="agregar_sprint_boton_interno('+i+');">AGREGAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]"></textarea></div></div></td></tr>');
 
                     sprint_contador_por_modulo[i]++;
 
                 }
-                if(m>0){
+                if(sprint_contador_por_modulo[i]>0){
 
-                    $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[i].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[i].value+sprint_contador_por_modulo[i]+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" class="form-control" onchange="activar_tercero();" onkeyup="activar_tercero();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger" id="" style="margin-top: 30px;" onclick="borrar_dinamic_interno('+sprint_contador_por_modulo[i]+','+i+'); activar_tercero();">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" onchange="activar_tercero();" onkeyup="activar_tercero();"></textarea></div></div></td></tr>');
+                    $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[i].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[i].value+sprint_contador_por_modulo[i]+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" class="form-control"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger" id="" style="margin-top: 30px;" onclick="borrar_dinamic_interno('+sprint_contador_por_modulo[i]+','+i+');">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]"></textarea></div></div></td></tr>');
 
                     sprint_contador_por_modulo[i]++;
 
@@ -371,7 +302,7 @@
 
         if(sprint_contador_por_modulo[indice]>0){
 
-                    $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[indice].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[indice].value+sprint_contador_por_modulo[indice]+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" id="nombre_sprints_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" class="form-control" onchange="activar_tercero();" onkeyup="activar_tercero();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger" style="margin-top: 30px;" onclick="borrar_dinamic_interno('+sprint_contador_por_modulo[indice]+','+indice+'); activar_tercero();">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" id="description_sprint_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" onchange="activar_tercero();" onkeyup="activar_tercero();"></textarea></div></div></td></tr>');
+                    $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[indice].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[indice].value+sprint_contador_por_modulo[indice]+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" class="form-control"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger" style="margin-top: 30px;" onclick="borrar_dinamic_interno('+sprint_contador_por_modulo[indice]+','+indice+');">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[indice].value+'[]"></textarea></div></div></td></tr>');
 
                     sprint_contador_por_modulo[indice]++;
 
@@ -389,7 +320,7 @@
         alert(sprint_contador_por_modulo[indice2]);
         //alert($("input[id='nombre_modulos[]']")[indice2].value+indice);
         $('#'+$("input[id='nombre_modulos[]']")[indice2].value+indice).remove();
-        //sprint_contador_por_modulo[indice2]--;
+        sprint_contador_por_modulo[indice2]--;
         alert(sprint_contador_por_modulo[indice2]);
     }
 
@@ -412,8 +343,6 @@
 
         borrar_dinamic_edit();
     }
-
-    
 
 </script>
     
