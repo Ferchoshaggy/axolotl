@@ -11,6 +11,7 @@ use App\Http\Controllers\UIController;
 use App\Http\Controllers\UXController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashController;
+use App\Http\Controllers\SearchesController;
 
 
 
@@ -37,12 +38,20 @@ Route::get('/dash', [DashController::class,'vista_dash'])->name('vista_dash');
 Route::post('/guardar_proyecto', [DashController::class,'guardar_proyecto'])->name('guardar_proyecto');
 Route::put('/selec_proy/{id}', [DashController::class,'seleccionar_proyecto'])->name('seleccionar_proyecto');
 
+//searches
+Route::get('/Search_Sprint/{id}', [SearchesController::class,'search_sprint'])->name('search_sprint');
+Route::get('/Search_Modulo/{id}', [SearchesController::class,'search_modulo'])->name('search_modulo');
+
+//avance
+Route::get('/Avance', [AvanceController::class,'vista_avance'])->name('Avance');
+
 //usuario config
 Route::get('/Config_user', [UserController::class,'vista_user_edit'])->name('edit_user');
 Route::post('/Actualizar_user', [UserController::class,'user_actualizar'])->name('user_actualizar');
 
 //matris master
 Route::get('/Matriz_Master', [MatrizController::class,'vista_matriz'])->name('matriz');
+Route::post('/Cambio_Porcentaje', [MatrizController::class,'cambio_porcentaje'])->name('cambio_porcentaje');
 
 //documetnacion
 Route::get('/Documentos', [DocumentosController::class,'vista_documentos'])->name('documentos');

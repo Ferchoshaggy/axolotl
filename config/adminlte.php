@@ -244,7 +244,7 @@ return [
         ],
         [
             'text' => 'Avance',
-            'url'  => '#',
+            'route'  => 'Avance',
             'icon' => 'fas fa-fw fa-chart-line',
         ],
         [

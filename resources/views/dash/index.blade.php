@@ -366,29 +366,39 @@
         //j--;
     });
 
+    //son mis arreglos para contar cuantos sprints debe de llevar cada modulo y cuantos lleva agregados, 
     var numero_sprint_modulo=[];
     var sprint_contador_por_modulo=[];
 
     function agregar_sprint_boton() {
+
+        //recorreomos cualquier arreglo ya que simpre existiran los mismos 
         for(var i=0;i<$("input[id='nombre_modulos[]']").length;i++){
+            //pasamos cuantos sprint tendra cada modulo por eso se uso un arreglo
             numero_sprint_modulo[i]=$("input[id='numero_sprints[]']")[i].value;
 
             //inicializamos el contador de numero de esprint
             sprint_contador_por_modulo[i]=1;
+            //hacemos un for como maximo el numero de spints que se le indico a al arreglo anterioro mente 
             for( var m=0;m<numero_sprint_modulo[i];m++){
 
+                //este solo es para que cree la tabla y el primer registro con el boton de agregar
                 if(m==0){
                     $("#contenedor_tablas").append('<table id="dynamic_field_'+$("input[id='nombre_modulos[]']")[i].value+'" style="background-color: transparent; width: 100%; height: 100%;"></table>');
 
+                    //el nombre de la tabla es dinamico y lo conseguimos mediante el nombre del modulo, practicamente casda modulo tiene su propia tabla
+                    // tambien con el arreglo le damos un identificador a los componentes para saber cuales spints le toca a cdad modulo ala hora de guardad tambien los componentes se les agrega el nombre del modulo junto con el id
                     $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[i].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[i].value+sprint_contador_por_modulo[i]+'"><td><div class="row"><div class="col-md-12" style="text-align: center; font-size: 20px;"><label style="font-weight: bold;">MODULO: <label style="font-weight: bold; color: red;">'+$("input[id='nombre_modulos[]']")[i].value+'</label></label></div><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" class="form-control" onchange="activar_tercero();" onkeyup="activar_tercero();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-success" style="margin-top: 30px;" onclick="agregar_sprint_boton_interno('+i+'); activar_tercero();">AGREGAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" onchange="activar_tercero();" onkeyup="activar_tercero();"></textarea></div></div></td></tr>');
 
                     sprint_contador_por_modulo[i]++;
 
                 }
+                //este es para agregar mas pero con el boton de borrar
                 if(m>0){
 
                     $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[i].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[i].value+sprint_contador_por_modulo[i]+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="nombre_sprints_'+$("input[id='nombre_modulos[]']")[i].value+'[]" class="form-control" onchange="activar_tercero();" onkeyup="activar_tercero();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger" id="" style="margin-top: 30px;" onclick="borrar_dinamic_interno('+sprint_contador_por_modulo[i]+','+i+'); activar_tercero();">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" id="description_sprint_'+$("input[id='nombre_modulos[]']")[i].value+'[]" onchange="activar_tercero();" onkeyup="activar_tercero();"></textarea></div></div></td></tr>');
 
+                    //le sumamos al arreglo de numero de esprints cuantos lleva ese modulo, esto solo es para poder itentificarlos para borrarlos
                     sprint_contador_por_modulo[i]++;
 
                 }
@@ -396,8 +406,11 @@
         }
     }
 
+    //esta funcion se activa con el bonton de agregar que tienen los sprint primeros de cada modulo
     function agregar_sprint_boton_interno(indice) {
 
+        //este es practicamente lo mismo pero este solo es para agregar uno mas si asi lo dece el usuario
+        //tambien ocupamos que se pasara el indice para saber a que tabla sera agregado el nuevo componente por eso la impirtancia de ocupar arreglos
         if(sprint_contador_por_modulo[indice]>0){
 
                     $("#dynamic_field_"+$("input[id='nombre_modulos[]']")[indice].value).append('<tr id="'+$("input[id='nombre_modulos[]']")[indice].value+sprint_contador_por_modulo[indice]+'"><td><div class="row"><div class="col-md-3" style="margin-bottom: 10px;"><label>NOMBRE DEL SPRINT´S</label><input type="text" name="nombre_sprints_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" id="nombre_sprints_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" class="form-control" onchange="activar_tercero();" onkeyup="activar_tercero();"></div><div class="col-md-3"  style="margin-bottom: 10px;"><button type="button" class="btn btn-danger" style="margin-top: 30px;" onclick="borrar_dinamic_interno('+sprint_contador_por_modulo[indice]+','+indice+'); activar_tercero();">ELIMINAR</button></div></div><div class="row"><div class="col-md-12"  style="margin-bottom: 10px;"><label>DESCRIPCIÓN</label><textarea class="form-control" name="description_sprint_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" id="description_sprint_'+$("input[id='nombre_modulos[]']")[indice].value+'[]" onchange="activar_tercero();" onkeyup="activar_tercero();"></textarea></div></div></td></tr>');
@@ -408,20 +421,16 @@
 
     }
 
-    $(document).on('click', '.remove_1', function(){
-        var id=$(this).attr("id"); 
-        $('#fila_a'+id+'').remove();
-        //j--;
-    });
-
-    function borrar_dinamic_interno(indice,indice2){
-        alert(sprint_contador_por_modulo[indice2]);
+    //este se activa con el boton de eliminar que contiene cada componente, le pasamos el numero que identifica a ese componente y el indice del arreglo para saber a que tabla pertenece y poder borrarlo
+    function borrar_dinamic_interno(numero_identificador_sprint,indice2){
+        //alert(sprint_contador_por_modulo[indice2]);
         //alert($("input[id='nombre_modulos[]']")[indice2].value+indice);
-        $('#'+$("input[id='nombre_modulos[]']")[indice2].value+indice).remove();
+        $('#'+$("input[id='nombre_modulos[]']")[indice2].value+numero_identificador_sprint).remove();
         //sprint_contador_por_modulo[indice2]--;
-        alert(sprint_contador_por_modulo[indice2]);
+        //alert(sprint_contador_por_modulo[indice2]);
     }
 
+    //esta es para borrar todos los componentes de la tabla de modulos 
     function borrar_dinamic_edit(){
         for(var z=0;z<=j;z++){
           $('#fila_a'+z+'').remove();
@@ -431,11 +440,14 @@
         document.getElementById("envio_nuevo_proyecto").reset();
     }
 
+    //esta es para borrar todas las tablas creadas de los sprints, esto se debe de hacer primero que la de eliminar modulos ya que meditante los modulos puedo hacer la eliminacion de las tablas de los sprint, una vez se borren estos ya puedo borrar los modulos
     function borrar_sprints_dinamicos(){
 
         for(var i=0;i<$("input[id='nombre_modulos[]']").length;i++){
+            //como comente cada taba se identifica mediante el nombre del modulo
             $('#dynamic_field_'+$("input[id='nombre_modulos[]']")[i].value).remove();
         }
+        //reinico los arreglos para evitar errores de conteo al reiniciar
         numero_sprint_modulo=[];
         sprint_contador_por_modulo=[];
 
