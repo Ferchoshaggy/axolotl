@@ -3,6 +3,8 @@
 @section('title', 'Avance')
 
 @section('content_header')
+@if (isset($proyectos))
+
 <div><h1><center>AVANCE</center></h1></div>
 <!--este es para el selected2 -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" >
@@ -233,5 +235,8 @@ echo "
 
 
  ?>
+ @else
+ No tienes Un proyecto seleccionado
+@endif
 
 @stop
