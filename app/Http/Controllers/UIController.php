@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class UIController extends Controller
 {
@@ -12,6 +14,7 @@ class UIController extends Controller
     }
     
     public function vista_ui(){
-        return view('UI.Ui');
+        $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->get();
+        return view('UI.Ui',compact('proyectos'));
      }
 }

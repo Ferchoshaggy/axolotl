@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class PresupuestoController extends Controller
 {
@@ -12,6 +14,7 @@ class PresupuestoController extends Controller
     }
     
     public function vista_presupuesto(){
-        return view('Presupuestos.Presupuesto');
+        $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->get();
+        return view('Presupuestos.Presupuesto',compact('proyectos'));
      }
 }

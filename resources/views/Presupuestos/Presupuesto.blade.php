@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<!-- Modal Nuevo UI-->
+<!-- Modal Nuevo Presupuesto-->
 <div class="modal fade bd-example-modal-lg" id="ModalPresupuesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -80,7 +80,7 @@
   </div>
   <div class="col-md-6">
     <label for="concepto">Concepto del Egreso</label>
-    <input type="text" name="concepto" class="form-control">
+    <textarea name="concepto" class="form-control"></textarea>
   </div>
   <div class="col-md-3">
     <label style="visibility: hidden">--</label>

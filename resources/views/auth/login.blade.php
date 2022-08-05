@@ -41,14 +41,14 @@
                     <x-jet-input-error for="password"></x-jet-input-error>
                 </div>
 
-                <div class="mb-3">
+             <!--    <div class="mb-3">
                     <div class="custom-control custom-checkbox">
                         <x-jet-checkbox id="remember_me" name="remember" />
                         <label class="custom-control-label" for="remember_me">
                             {{ __('RECORDAR CONTRASEÑA') }}
                         </label>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mb-0">
 <div style="display: flex; justify-content: center;">
@@ -57,16 +57,17 @@
                         {{ __('INGRESAR') }}
                     </x-jet-button>
 </div>
-                    <div class="text-align: center;">
-                        @if (Route::has('password.request'))
-                            <a class="text-muted me-3" href="{{ route('password.request') }}">
-                                {{ __('¿OLVIDASTE TU CONTRASEÑA?') }}
-                            </a>
-                        @endif
+       <!-- <div class="text-align: center;">
+            @if (Route::has('password.request'))
+                <a class="text-muted me-3" href="{{ route('password.request') }}">
+                    {{ __('¿OLVIDASTE TU CONTRASEÑA?') }}
+                </a>
+            @endif
 
-                        
-                             
-                    </div>
+                    
+        </div> 
+    -->
+                    
                 </div>
             </form>
         </div>

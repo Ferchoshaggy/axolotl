@@ -32,6 +32,16 @@
 </div>
 @endif
 
+@if(Session::has('selec'))
+<br>
+<div class="alert alert-{{ Session::get('color') }}" role="alert" style="font-weight: bold;">
+   {{ Session::get('selec') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
 <!-- modal para la info de segir la gia-->
 @if(Session::get('message')!=null)
 
@@ -89,7 +99,12 @@
             <div class="row">
                 
                 <div class="col-md-6">
-                    <select name="" id="" class="form-control" style="font-weight: bold;" >
+                    @foreach($proyectos as $proyecto)
+                    <form action="{{route('seleccionar_proyecto',$proyecto->id)}}" method="POST" name="formulario1">
+                        @csrf
+                        @method('PUT')
+                        @endforeach
+                    <select name="proyecto" id="proyectoSelec" class="form-control" style="font-weight: bold;" onchange="ProyectoSeleccionado();">
                         <option value="" style="text-align: center" disabled selected>Seleccione Proyecto</option>
                         @foreach($proyectos as $proyecto)
                         @if(Auth::user()->id_proyecto_select==$proyecto->id)
@@ -99,6 +114,7 @@
                         @endif
                         @endforeach
                     </select>
+                </form>
                 </div>
                 <div class="col-md-6">
                     
@@ -107,6 +123,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+     function ProyectoSeleccionado(){
+        let proyectoSelec=document.getElementById('proyectoSelec');
+        let proyecto = proyectoSelec.value;
+
+        //document.getElementById('aqui').innerText= `${proyecto}`;
+        document.formulario1.submit();
+     }
+
+    </script>
+
+
 <!--
     <div style="display:flex; justify-content:center; margin:0 25% 0 25%;" >
         <button class="btn form-control" style="margin:0 3% 0 0; background:rgb(235, 75, 235); color:white;">Nuevo Proyecto</button>
@@ -414,6 +443,9 @@
     }
 
     
+//AJAX PARA COLOCAR PROYECTO
+
+
 
 </script>
     

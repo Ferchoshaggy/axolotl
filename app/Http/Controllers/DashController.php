@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DB;
 class DashController extends Controller
@@ -56,5 +56,16 @@ class DashController extends Controller
 
         }
         return redirect()->back()->with(['message' => 'Proyecto Guardado con Éxito', 'color' => 'success']);
+    }
+
+    public function seleccionar_proyecto(Request $request,$id)
+    {
+        DB::table("users")->where('id',Auth::user()->id)->update([
+
+            "id_proyecto_select"=>$request['proyecto'],
+            
+        ]);
+        
+        return redirect()->back()->with(['selec' => 'Seleccionaste proyecto con exito', 'color' => 'success']);
     }
 }

@@ -35,6 +35,7 @@ Route::get('/', function () {
 //dash
 Route::get('/dash', [DashController::class,'vista_dash'])->name('vista_dash');
 Route::post('/guardar_proyecto', [DashController::class,'guardar_proyecto'])->name('guardar_proyecto');
+Route::put('/selec_proy/{id}', [DashController::class,'seleccionar_proyecto'])->name('seleccionar_proyecto');
 
 //usuario config
 Route::get('/Config_user', [UserController::class,'vista_user_edit'])->name('edit_user');

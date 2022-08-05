@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class GrabacionesController extends Controller
 {
@@ -12,6 +14,7 @@ class GrabacionesController extends Controller
     }
     
     public function vista_videos(){
-        return view('Grabaciones.Video');
+        $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->get();
+        return view('Grabaciones.Video',compact('proyectos'));
      }
 }
