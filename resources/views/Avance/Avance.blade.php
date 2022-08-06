@@ -30,19 +30,21 @@
   }
 
   .texto_grande{
+    font-size: 25px;
     font-weight: bold;
     transition: .8s;
   }
   .texto_grande:hover{
-    font-size: 30px;
+    font-size: 35px;
     transition: .8s;
   }
 
 </style>
 
-<div class="card">
+<div class="card" id="cont">
   <div class="card-body">
-    <div class="col-md-12" >
+    <div class="col-md-12" style="text-align: center;" >
+        <p class="texto_grande" id="porcentaje_proyecto">$proyectos->nombre </p>
       <div id="container"  style="margin-right: 0px; margin-left: 0px;"></div>
     </div>
     
@@ -152,12 +154,12 @@
 echo "<script type='text/javascript'>
 
 Highcharts.chart('container', {
-        colors: ['#01BAF2', '#71BF45', '#FAA74B', '#B37CD2'],
+        colors: ['#FFB6C1','#00A7C6','#B8860B','#FAFF01','#FFEBCD','#4B0082','#F0E68C','#B37CD2','#63AE00','#FF0000','#AEAEAE','#01BAF2', '#71BF45', '#FAA74B'],
         chart: {
             type: 'pie'
         },
         title: {
-            text: '<p class="."texto_grande"." id="."porcentaje_proyecto".">$proyectos->nombre</p>'
+            text: 'PORCENTAJE DE CADA MODULO'
         },
         tooltip: {
             valueSuffix: '%'
@@ -213,7 +215,7 @@ Highcharts.chart('container', {
                 $porcentaje_por_modulo_unitario=($divicion*$porcentaje_por_modulo)/$porcentaje_por_modulo;
                 $suma_porcentaje_por_modulo_unitario+=$porcentaje_por_modulo_unitario;
             echo "{
-                name: 'MODULO: $modulo->nombre',
+                name: '$modulo->nombre',
                 
                 y: $porcentaje_por_modulo_unitario
             }, ";
@@ -230,7 +232,7 @@ Highcharts.chart('container', {
     });
 ";
 $result=$suma_porcentaje_por_modulo_unitario/$sumatoria_modulo;
-$texto="$proyectos->nombre   $result%";
+$texto="$proyectos->nombre $result%";
 echo "
     document.getElementById('porcentaje_proyecto').innerHTML='".$texto."';
 
