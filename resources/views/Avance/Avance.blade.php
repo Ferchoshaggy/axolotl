@@ -154,7 +154,7 @@
 echo "<script type='text/javascript'>
 
 Highcharts.chart('container', {
-        colors: ['#01BAF2', '#71BF45', '#FAA74B', '#B37CD2'],
+        colors: ['#FFB6C1','#00A7C6','#B8860B','#FAFF01','#FFEBCD','#4B0082','#F0E68C','#B37CD2','#63AE00','#FF0000','#AEAEAE','#01BAF2', '#71BF45', '#FAA74B'],
         chart: {
             type: 'pie'
         },
@@ -235,29 +235,6 @@ $result=$suma_porcentaje_por_modulo_unitario/$sumatoria_modulo;
 $texto="$proyectos->nombre $result%";
 echo "
     document.getElementById('porcentaje_proyecto').innerHTML='".$texto."';
-
-    //window.onresize = cambio_pantalla;
-    var valor_cont=document.getElementById('cont').clientWidth;
-
-    var boxProducto = document.getElementsByClassName('.nav-item');
-
-    $('.fa-bars').click(function(){
-       if(valor_cont!=document.getElementById('cont').clientWidth){
-                
-                document.getElementById('container').style.width='100%';
-        }
-        
-    });
-
-    $('.nav-link').click(function(){
-       if(valor_cont!=document.getElementById('cont').clientWidth){
-                
-                document.getElementById('container').style.width='100%';
-        }
-    });
-    
-
-
 
 </script>";
 
