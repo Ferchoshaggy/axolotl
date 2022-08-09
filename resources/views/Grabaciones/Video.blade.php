@@ -11,7 +11,18 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
+@if(Session::has('message'))
+<br>
+<div class="alert alert-{{ Session::get('color') }}" role="alert" style="font-weight: bold;">
+   {{ Session::get('message') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
 @stop
+
 @section('content')
 
 <div class="card">
@@ -28,13 +39,70 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse($grabaciones as $gra)
+                  @if(Auth::user()->id_proyecto_select==$gra->id_proyecto)
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button></td>
-                    <td><button class="btn" style="background: rgb(226, 94, 134); color:white;">Ver</button></td>
+                    <th style="text-align: center;">{{$gra->fecha}}</th>
+                    <td style="text-align: center;">{{$gra->link}}</td>
+                    <td style="text-align: center;">{{$gra->descripcion}}</td>
+                    <td style="text-align: center;"><button class="btn" style="background: rgb(160, 47, 160); color:white;" data-toggle="modal" data-target="#modal-delete-{{$gra->id}}">ELIMINAR
+                    </button></td>
+                    <td style="text-align: center;"><a href="{{$gra->link}}" target="_blank"><button class="btn" style="background: rgb(226, 94, 134); color:white;">Ver</button></a>
+                      </td>
                   </tr>
+<!-- modal eliminar -->
+<div class="modal fade" id="modal-delete-{{$gra->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form action="{{route('eliminar_link',$gra->id)}}" method="POST">
+      @method('DELETE')
+      @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseas Eliminar el link <br> <label style="color: red">{{$gra->link}}</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+                  @endif
+                  @empty
+                  <style>
+                  .flex {
+                    animation-duration: 3s;
+                    animation-name: slidein;
+                  }
+                  
+                  @keyframes slidein {
+                    from {
+                      margin-left: 100%;
+                      width: 300%
+                    }
+                  
+                    to {
+                      margin-left: 0%;
+                      width: 100%;
+                    }
+                  }
+                  </style>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: center;"><label class="flex"> No Exiten Registros Ahorita</label></td>
+                  </tr>
+                  @endforelse
+
                 </tbody>
               </table>
         </div>
@@ -59,32 +127,56 @@
       </div>
       <div class="modal-body">
 
+  <form method="POST" action="{{route('guardar_link')}}" >
+    @csrf
+    
+    @if (isset($proyectos))
+    
+    @foreach($proyectos as $pro)
+    <input class="form-control" type="hidden" name="idpro" value="{{Auth::user()->id_proyecto_select}}">
+    @endforeach
+    
+    @endif
+
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-8">
 <label for="link">Link</label>
 <input type="text" name="link" class="form-control">
+@error('link')
+    <p class="form-text text-danger">{{ $message }}</p>
+     @enderror
   </div>
   <div class="col-md-4">
     <label for="Fecha">Fecha de Grabacion</label>
     <input type="date" name="fecha" class="form-control">
+    @error('fecha')
+    <p class="form-text text-danger">{{ $message }}</p>
+     @enderror
   </div>
 </div>
-
 <div class="row">
   <div class="col-md-12">
   <label for="Descripcion">Descripcion</label>
-  <textarea name="Descripcion" class="form-control"></textarea>
+  <textarea name="descripcion" class="form-control"></textarea>
+  @error('descripcion')
+    <p class="form-text text-danger">{{ $message }}</p>
+     @enderror
   </div>
 </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        @if (isset($proyectos))  
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        @else
+        <button type="submit" class="btn btn-primary" disabled><abbr title="No hay Proyecto Seleccionado"> Guardar</button>
+        @endif
       </div>
     </div>
   </div>
 </div>
+</form>
 
 @stop
 

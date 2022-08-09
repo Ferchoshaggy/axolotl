@@ -22,6 +22,7 @@ class CreateUxesTable extends Migration
             $table->date('fecha');
             $table->string('archivo');
             $table->text('descripcion');
+            $table->uuid("uuid")->unique()->index();
             $table->timestamps();
         });
     }

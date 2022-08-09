@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="container-fluid fixed-top p-4 d-flex justify-content-end" style="background: #191e24">
+    <div class="container-fluid fixed-top p-4 d-flex justify-content-end" style="background: #24252a">
         </div>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -8,7 +8,7 @@
 
         <x-jet-validation-errors class="mb-3" />
 
-        <div class="card-body"  style="color: white; font-weight: bold; background-color:#191e24; margin-left: -16px; margin-right: -16px; border-radius: 5px;">
+        <div class="card-body"  style="color: white; font-weight: bold; background-color:#24252a; margin-left: -16px; margin-right: -16px; border-radius: 5px;">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 

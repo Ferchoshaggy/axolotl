@@ -20,7 +20,7 @@
         }
     </style>
 </head>
-<body style="background: #191e24">
+<body style="background: #24252a">
     <div class="container-fluid fixed-top p-4">
         <div class="col-12">
             <div class="d-flex justify-content-end">

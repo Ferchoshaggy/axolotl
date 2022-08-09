@@ -54,16 +54,27 @@ Route::get('/Matriz_Master', [MatrizController::class,'vista_matriz'])->name('ma
 Route::post('/Cambio_Porcentaje', [MatrizController::class,'cambio_porcentaje'])->name('cambio_porcentaje');
 
 //documetnacion
-Route::get('/Documentos', [DocumentosController::class,'vista_documentos'])->name('documentos');
+Route::get('/Documents', [DocumentosController::class,'vista_documentos'])->name('documentos');
+Route::post('/Save_documents', [DocumentosController::class,'guardar_documento'])->name('guardar_documentos');
+Route::get('/Documents/{uuid}/download', [DocumentosController::class,'descargar_documento'])->name('descargar_documento');
+Route::delete('/Documents/{id}/delete', [DocumentosController::class,'delete_doc'])->name('eliminar_documento');
 
 //grabaciones
 Route::get('/Grabaciones', [GrabacionesController::class,'vista_videos'])->name('videos');
+Route::post('/Save_grabaciones', [GrabacionesController::class,'guardar_grabaciones'])->name('guardar_link');
+Route::delete('/grabaciones/{id}/delete', [GrabacionesController::class,'delete_link'])->name('eliminar_link');
 
 //uxs
 Route::get('/UXS', [UXController::class,'vista_ux'])->name('ux');
+Route::post('/Save_ux', [UXController::class,'guardar_ux'])->name('guardar_ux');
+Route::get('/ux/{uuid}/download', [UXController::class,'descargar_ux'])->name('descargar_ux');
+Route::delete('/ux/{id}/delete', [UXController::class,'delete_ux'])->name('eliminar_ux');
 
 //uis
 Route::get('/UIS', [UIController::class,'vista_ui'])->name('ui');
+Route::post('/Save_ui', [UIController::class,'guardar_ui'])->name('guardar_ui');
+Route::get('/ui/{uuid}/download', [UIController::class,'descargar_ui'])->name('descargar_ui');
+Route::delete('/ui/{id}/delete', [UIController::class,'delete_ui'])->name('eliminar_ui');
 
 //presupuesto
 Route::get('/Presupuesto', [PresupuestoController::class,'vista_presupuesto'])->name('presupuesto');
