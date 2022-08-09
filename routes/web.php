@@ -52,6 +52,13 @@ Route::post('/Actualizar_user', [UserController::class,'user_actualizar'])->name
 //matris master
 Route::get('/Matriz_Master', [MatrizController::class,'vista_matriz'])->name('matriz');
 Route::post('/Cambio_Porcentaje', [MatrizController::class,'cambio_porcentaje'])->name('cambio_porcentaje');
+Route::post('/actualizar_proyecto', [MatrizController::class,'actualizar_proyecto'])->name('actualizar_proyecto');
+Route::post('/actualizar_modulo', [MatrizController::class,'actualizar_modulo'])->name('actualizar_modulo');
+Route::post('/guardar_modulos', [MatrizController::class,'agregar_modulos'])->name('agregar_modulos');
+Route::post('/agregar_sprints', [MatrizController::class,'agregar_sprints'])->name('agregar_sprints');
+Route::post('/actualizar_sprint', [MatrizController::class,'actualizar_sprint'])->name('actualizar_sprint');
+Route::delete('/eliminar_sprint', [MatrizController::class,'eliminar_sprint'])->name('eliminar_sprint');
+Route::delete('/eliminar_modulo', [MatrizController::class,'eliminar_modulo'])->name('eliminar_modulo');
 
 //documetnacion
 Route::get('/Documents', [DocumentosController::class,'vista_documentos'])->name('documentos');

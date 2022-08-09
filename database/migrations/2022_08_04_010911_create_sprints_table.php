@@ -19,7 +19,7 @@ class CreateSprintsTable extends Migration
             $table->foreign("id_modulo")->references("id")->on("modulos")->onDelete("cascade");
             $table->string('nombre');
             $table->text('descripcion');
-            $table->float('porcentaje')->default(0);
+            $table->double('porcentaje')->default(0);
             $table->timestamps();
         });
     }
