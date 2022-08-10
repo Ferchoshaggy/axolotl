@@ -12,6 +12,53 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
+<style type="text/css">
+  input[type="file"]{
+        background: white;
+        outline: none;
+    }
+    ::-webkit-file-upload-button{
+      margin-top: -20px;
+      margin-left: -12px;
+      background: #00A1D8;
+      color: white;
+      height: 35px;
+      border: none;
+      outline: none;
+      font-weight: bolder;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    ::-webkit-file-upload-button:hover{
+      background: #111111;
+
+    }
+    .redondeo_img{
+      margin-bottom: 20px; 
+      border-radius: 100px; 
+      width: 200px; 
+      height: 200px;  
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
+      transition: 1s;
+    }
+
+    .redondeo_img:hover{
+      transition: 1s;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+</style>
+
+@if(Session::has('message'))
+<br>
+<div class="alert alert-{{ Session::get('color') }}" role="alert" style="font-weight: bold;">
+   {{ Session::get('message') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
 @stop
 @section('content')
 
@@ -29,13 +76,70 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse($uis as $ui)
+                  @if(Auth::user()->id_proyecto_select==$ui->id_proyecto)
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button></td>
-                    <td><button class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</button></td>
+                    <th style="text-align: center;">1</th>
+                    <td style="text-align: center;">Mark</td>
+                    <td style="text-align: center;">Otto</td>
+                    <td style="text-align: center;"><button class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button></td>
+                    <td style="text-align: center;"><button class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</button></td>
                   </tr>
+
+<!-- modal eliminar -->
+<div class="modal fade" id="modal-delete-{{$ui->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form action="{{route('eliminar_ui',$ui->id)}}" method="POST">
+      @method('DELETE')
+      @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar UI</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseas Eliminar el UI <br> <label style="color: red">{{$ui->nombre}}</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+                  @endif
+                  @empty
+                  <style>
+                  .flex {
+                    animation-duration: 3s;
+                    animation-name: slidein;
+                  }
+                  
+                  @keyframes slidein {
+                    from {
+                      margin-left: 100%;
+                      width: 300%
+                    }
+                  
+                    to {
+                      margin-left: 0%;
+                      width: 100%;
+                    }
+                  }
+                  </style>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: center;"><label class="flex"> No Exiten Registros Ahorita</label></td>
+                  </tr>
+                  @endforelse
+
+
                 </tbody>
               </table>
         </div>
@@ -60,39 +164,54 @@
       </div>
       <div class="modal-body">
 
+        <form method="POST" action="{{route('guardar_ux')}}" enctype="multipart/form-data" >
+          @csrf
+          
+          @if (isset($proyectos))
+          
+          @foreach($proyectos as $pro)
+          <input class="form-control" type="hidden" name="idpro" value="{{Auth::user()->id_proyecto_select}}">
+          @endforeach
+          
+          @endif
+
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
 <label for="Nombre">Nombre</label>
 <input type="text" name="nombre" class="form-control">
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="clave">Clave</label>
     <input type="text" name="clave" class="form-control">
   </div>
-  <div class="col-md-4">
-    <label for="algo" style="visibility: hidden">-</label>
-    <label class="btn btn-default btn-sm center-block btn-file form-control" style="background: rgb(226, 94, 134);">
-      <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
-      <input type="file" name="archivo" style="display: none;">
-    </label>
+  <div class="col-md-6">
+    <input type="file" name="archivo" class="form-control">
+    @error('archivo')
+    <p class="form-text text-danger">{{ $message }}</p>
+     @enderror
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
   <label for="Descripcion">Descripcion</label>
-  <textarea name="Descripcion" class="form-control"></textarea>
+  <textarea name="descripcion" class="form-control"></textarea>
   </div>
 </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        @if (isset($proyectos))  
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        @else
+        <button type="submit" class="btn btn-primary" disabled><abbr title="No hay Proyecto Seleccionado"> Guardar</button>
+        @endif
       </div>
     </div>
   </div>
 </div>
+</form>
 
 @stop
 
