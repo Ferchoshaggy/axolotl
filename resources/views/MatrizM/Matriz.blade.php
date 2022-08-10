@@ -106,6 +106,19 @@
 
 <div class="card">
     <div class="card-body">
+
+      <div class="row">
+
+          <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; ">
+            <button class="btn btn-success" data-toggle="modal" data-target="#menu_agregar" style="width: 200px; margin-right: 30px; margin-bottom: 10px;">Agregar</button>
+            <button class="btn boton_morado" data-toggle="modal" data-target="#menu_ediciones" style="width: 200px; margin-right: 30px; margin-bottom: 10px;">Editar</button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#menu_eliminar" style="width: 200px; margin-right: 30px; margin-bottom: 10px;">Eliminar</button>
+            <button class="btn btn-warning"  data-toggle="modal" data-target="#ver_pdf" style="color: white; width: 200px; margin-right: 30px; margin-bottom: 10px;">PDF</button>
+
+          </div>
+          
+        </div>
+
         <div class="table-responsive">
             <table class="table">
             <thead style="background:rgb(245, 187, 198); color:black;">
@@ -144,17 +157,7 @@
                 </tbody>
               </table>
         </div>
-        <div class="row">
-
-          <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px; text-align: right;">
-            <button class="btn btn-success" data-toggle="modal" data-target="#menu_agregar" style="width: 200px; margin-right: 30px; margin-bottom: 10px;">Agregar</button>
-            <button class="btn boton_morado" data-toggle="modal" data-target="#menu_ediciones" style="width: 200px; margin-right: 30px; margin-bottom: 10px;">Editar</button>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#menu_eliminar" style="width: 200px; margin-right: 30px; margin-bottom: 10px;">Eliminar</button>
-            <button class="btn btn-warning" style="color: white; width: 200px; margin-right: 30px; margin-bottom: 10px;">PDF</button>
-
-          </div>
-          
-        </div>
+        
 
     </div>
 </div>
@@ -690,6 +693,36 @@
 </div>
 
 
+<!-- ver pdf-->
+<div class="modal fade" id="ver_pdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">PDF</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12" style="text-align: center;display: none;" id="no_se_mira">
+            <p>UPss! &nbsp;&nbsp; !CREO QUE NO SE VE BIEN EL PDF; VAMOS A OTRA PAGINA OK!</p>
+            <a class="btn btn-success" target="_blank" href="{{url('/Visor_PDF')}}">¡VAMOS! <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg></a>
+        </div>
+        <embed type="application/pdf" src="{{url('/Visor_PDF')}}" style="width:100%; height: 600px;">
+
+          
+          
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >CERRAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 @stop
 
@@ -706,6 +739,16 @@
 <!-- este es para el selected2-->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
+
+  //let navegador = navigator.userAgent;
+  //console.log(navegador);
+  //este es para saber que dispositivo se esta usando y mandarlo a otro lado al usuario ya que no se mira bien el pdf
+  if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+    document.getElementById("no_se_mira").style.display="block";
+  }else{
+    console.log("No estás usando un móvil");
+  }
+
     $(document).ready(function() {
       $('.table').DataTable({
          "language": {

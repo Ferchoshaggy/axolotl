@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use PDF;
 
 class MatrizController extends Controller
 {
@@ -129,5 +130,23 @@ class MatrizController extends Controller
    public function eliminar_sprint(Request $request){
       DB::table("sprints")->delete($request['id_sprint_delete']);
       return redirect()->back()->with(['message' => 'Sprint Eliminado con Éxito', 'color' => 'danger']);
+   }
+
+   public function visor_pdf(){
+
+      $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->first();
+      if($proyectos==null){
+         $id_proyecto=0;
+      }else{
+         $id_proyecto=$proyectos->id;
+      }
+      $modulos=DB::table("modulos")->where("id_proyecto",$id_proyecto)->get();
+      $sprints=DB::table("sprints")->select("*")->get();
+      $colors=DB::table("colors")->select("*")->get();
+      $pdf = PDF::loadView('MatrizM.Visor_PDF',compact('proyectos','modulos','sprints','colors'))->setPaper(array(0,0,956,1238));
+      $nombre_pdf="Matriz Master_".$proyectos->nombre.".pdf";
+      return $pdf->stream($nombre_pdf);
+      //return view('MatrizM.Visor_PDF',compact('proyectos','modulos','sprints','colors'));
+     
    }
 }
