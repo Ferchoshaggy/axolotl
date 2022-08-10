@@ -11,6 +11,53 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
+<style type="text/css">
+  input[type="file"]{
+        background: white;
+        outline: none;
+    }
+    ::-webkit-file-upload-button{
+      margin-top: -20px;
+      margin-left: -12px;
+      background: #00A1D8;
+      color: white;
+      height: 35px;
+      border: none;
+      outline: none;
+      font-weight: bolder;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    ::-webkit-file-upload-button:hover{
+      background: #111111;
+
+    }
+    .redondeo_img{
+      margin-bottom: 20px; 
+      border-radius: 100px; 
+      width: 200px; 
+      height: 200px;  
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
+      transition: 1s;
+    }
+
+    .redondeo_img:hover{
+      transition: 1s;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+</style>
+
+@if(Session::has('message'))
+<br>
+<div class="alert alert-{{ Session::get('color') }}" role="alert" style="font-weight: bold;">
+   {{ Session::get('message') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
 @stop
 @section('content')
 
@@ -29,11 +76,11 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button></td>
-                    <td><button class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</button></td>
+                    <th style="text-align: center;">1</th>
+                    <td style="text-align: center;">Mark</td>
+                    <td style="text-align: center;">Otto</td>
+                    <td style="text-align: center;"><button class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button></td>
+                    <td style="text-align: center;"><button class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -60,27 +107,26 @@
       <div class="modal-body">
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
 <label for="Nombre">Nombre</label>
 <input type="text" name="nombre" class="form-control">
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="clave">Clave</label>
     <input type="text" name="clave" class="form-control">
   </div>
-  <div class="col-md-4">
-    <label for="algo" style="visibility: hidden">-</label>
-    <label class="btn btn-default btn-sm center-block btn-file form-control" style="background: rgb(226, 94, 134);">
-      <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
-      <input type="file" name="archivo" style="display: none;">
-    </label>
+  <div class="col-md-6">
+    <label for="documento">Documento</label>
+    <input type="file" name="archivo" class="form-control">
+    @error('archivo')
+    <p class="form-text text-danger">{{ $message }}</p>
+     @enderror
   </div>
 </div>
-
 <div class="row">
   <div class="col-md-12">
   <label for="Descripcion">Descripcion</label>
-  <textarea name="Descripcion" class="form-control"></textarea>
+  <textarea name="descripcion" class="form-control"></textarea>
   </div>
 </div>
 

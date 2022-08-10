@@ -11,7 +11,52 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
+<style type="text/css">
+  input[type="file"]{
+        background: white;
+        outline: none;
+    }
+    ::-webkit-file-upload-button{
+      margin-top: -20px;
+      margin-left: -12px;
+      background: #00A1D8;
+      color: white;
+      height: 35px;
+      border: none;
+      outline: none;
+      font-weight: bolder;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    ::-webkit-file-upload-button:hover{
+      background: #111111;
 
+    }
+    .redondeo_img{
+      margin-bottom: 20px; 
+      border-radius: 100px; 
+      width: 200px; 
+      height: 200px;  
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.15);
+      transition: 1s;
+    }
+
+    .redondeo_img:hover{
+      transition: 1s;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+</style>
+
+@if(Session::has('message'))
+<br>
+<div class="alert alert-{{ Session::get('color') }}" role="alert" style="font-weight: bold;">
+   {{ Session::get('message') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
 
 @stop
 @section('content')
@@ -19,7 +64,7 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table" >
             <thead style="background:rgb(245, 187, 198); color:black;">
                   <tr>
                     <th scope="col" style="text-align: center;">Fecha</th>
@@ -30,13 +75,69 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse($documentos as $doc)
+                  @if(Auth::user()->id_proyecto_select==$doc->id_proyecto)
+          <tr>
+            <th style="text-align: center;">{{$doc->fecha}}</th>
+            <td style="text-align: center;">{{$doc->nombre}}</td>
+            <td style="text-align: center;">{{$doc->descripcion}}</td>    
+            <td style="text-align: center;"><button class="btn" style="background: rgb(160, 47, 160); color:white;" data-toggle="modal" data-target="#modal-delete-{{$doc->id}}">ELIMINAR
+              </button></td>
+            <td style="text-align: center;"><a href="{{route('descargar_documento',$doc->uuid)}}" class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</a></td>
+          </tr>
+
+<!-- modal eliminar -->
+<div class="modal fade" id="modal-delete-{{$doc->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form action="{{route('eliminar_documento',$doc->id)}}" method="POST">
+      @method('DELETE')
+      @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar Documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseas Eliminar el Documento <br> <label style="color: red">{{$doc->nombre}}</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+                  @endif
+                  @empty
+                  <style>
+                  .flex {
+                    animation-duration: 3s;
+                    animation-name: slidein;
+                  }
+                  
+                  @keyframes slidein {
+                    from {
+                      margin-left: 100%;
+                      width: 300%
+                    }
+                  
+                    to {
+                      margin-left: 0%;
+                      width: 100%;
+                    }
+                  }
+                  </style>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button></td>
-                    <td><button class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</button></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: center;"><label class="flex"> No Exiten Registros Ahorita</label></td>
                   </tr>
+                  @endforelse
                 </tbody>
               </table>
         </div>
@@ -59,41 +160,58 @@
         </button>
       </div>
       <div class="modal-body">
+<form method="POST" action="{{route('guardar_documentos')}}" enctype="multipart/form-data" >
+@csrf
+
+@if (isset($proyectos))
+
+@foreach($proyectos as $pro)
+<input class="form-control" type="hidden" name="idpro" value="{{Auth::user()->id_proyecto_select}}">
+@endforeach
+
+@endif
 
 <div class="row">
-  <div class="col-md-4">
-<label for="Nombre">Nombre</label>
-<input type="text" name="nombre" class="form-control">
-  </div>
+
   <div class="col-md-4">
     <label for="Fecha">Fecha de Recibido</label>
     <input type="date" name="fecha" class="form-control">
+    @error('fecha')
+    <p class="form-text text-danger">{{ $message }}</p>
+     @enderror
   </div>
-  <div class="col-md-4">
+  <div class="col-md-8">
     <label for="documento">Documento</label>
-    <label class="btn btn-default btn-sm center-block btn-file form-control" style="background: rgb(226, 94, 134);">
-      <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
-      <input type="file" name="archivo" style="display: none;">
-    </label>
+      <input type="file" name="archivo" class="form-control">
+      @error('archivo')
+      <p class="form-text text-danger">{{ $message }}</p>
+       @enderror
   </div>
 </div>
-
 <div class="row">
   <div class="col-md-12">
   <label for="Descripcion">Descripcion</label>
-  <textarea name="Descripcion" class="form-control"></textarea>
+  <textarea name="descripcion" class="form-control"></textarea>
+  @error('descripcion')
+  <p class="form-text text-danger">{{ $message }}</p>
+   @enderror
   </div>
 </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        @if (isset($proyectos))  
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        @else
+        <button type="submit" class="btn btn-primary" disabled><abbr title="No hay Proyecto Seleccionado"> Guardar</button>
+        @endif
       </div>
+   
     </div>
   </div>
 </div>
-
+</form>
 
 @stop
 
