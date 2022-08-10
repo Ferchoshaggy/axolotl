@@ -20,6 +20,7 @@ class DocumentosController extends Controller
         $documentos=DB::table("documentos")->select("*")->get();
         return view('Documentos.Documento',compact('proyectos','documentos'));
      }
+
      public function guardar_documento(Request $request){
 
         $request->validate([
@@ -40,7 +41,6 @@ class DocumentosController extends Controller
         }else{
             $nombre=null;
             $nombre2=null;
-            $uuid = null;
         }
         if($request['archivo']!=null){
             $file_image = $request->file('archivo');
@@ -61,6 +61,7 @@ class DocumentosController extends Controller
         return redirect()->back()->with(['message' => 'Documento Guardado con Éxito', 'color' => 'success']);
 
      }
+     
      public function descargar_documento($uuid){
         $doc=DB::table("documentos")->where('uuid',$uuid)->first();
         $pahtToFile=public_path("save_doc/". $doc->archivo);

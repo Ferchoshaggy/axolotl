@@ -4,6 +4,7 @@
 
 @section('content_header')
 <div><h1><center>GRABACIONES</center></h1></div>
+@if (isset($proyectos))
 <!--este es para el selected2 -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" >
 
@@ -201,5 +202,16 @@
     });
   });
 </script>
+
+@else
+ <div class="card-body">
+    <div style="text-align : center; ">
+        <img src="{{ asset('/logos/axo.png') }}" width="30%" height="30%">
+</div>
+<div>
+    <h1 style="margin-right: 0px; margin-left: 0px; margin-top: 10px; text-align : center;">No hay un Proyecto Seleccionado..¡¡</h1>
+</div>
+ </div>
+@endif
 
 @stop
