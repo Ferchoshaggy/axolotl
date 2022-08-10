@@ -4,6 +4,7 @@
 
 @section('content_header')
 <div><h1><center>UX</center></h1></div>
+@if (isset($proyectos))
 <!--este es para el selected2 -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" >
 
@@ -71,17 +72,78 @@
                     <th scope="col" style="text-align: center;">Nombre</th>
                     <th scope="col" style="text-align: center;">Descripcion</th>
                     <th scope="col" style="text-align: center;">Eliminar</th>
-                    <th scope="col" style="text-align: center;">Descargar</th>
+                    <th scope="col" style="text-align: center;">Opcion</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse($uxs as $ux)
+                  @if(Auth::user()->id_proyecto_select==$ux->id_proyecto)
                   <tr>
-                    <th style="text-align: center;">1</th>
-                    <td style="text-align: center;">Mark</td>
-                    <td style="text-align: center;">Otto</td>
-                    <td style="text-align: center;"><button class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button></td>
-                    <td style="text-align: center;"><button class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</button></td>
+                    <th style="text-align: center;">{{$ux->clave}}</th>
+                    <td style="text-align: center;">{{$ux->nombre}}</td>
+                    <td style="text-align: center;">{{$ux->descripcion}}</td>
+                    <td style="text-align: center;"><button class="btn" style="background: rgb(160, 47, 160); color:white;" data-toggle="modal" data-target="#modal-delete-{{$ux->id}}">ELIMINAR
+                    </button></td>
+                    @if($ux->archivo==null)
+                    <td style="text-align: center;"><a href="{{$ux->link}}" target="_blank" class="btn" style="background: rgb(226, 94, 134); color:white;">Ver</a></td>
+                    @else
+                  <td style="text-align: center;"><a href="{{route('descargar_ux',$ux->uuid)}}" class="btn" style="background: rgb(226, 94, 134); color:white;">Descargar</a></td>
+                  @endif 
+                 </tr>
+
+<!-- modal eliminar -->
+<div class="modal fade" id="modal-delete-{{$ux->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form action="{{route('eliminar_ux',$ux->id)}}" method="POST">
+      @method('DELETE')
+      @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar UX</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseas Eliminar el UX <br> <label style="color: red">{{$ux->nombre}}</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn" style="background: rgb(160, 47, 160); color:white;">Eliminar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+                  @endif
+                  @empty
+                  <style>
+                  .flex {
+                    animation-duration: 3s;
+                    animation-name: slidein;
+                  }
+                  
+                  @keyframes slidein {
+                    from {
+                      margin-left: 100%;
+                      width: 300%
+                    }
+                  
+                    to {
+                      margin-left: 0%;
+                      width: 100%;
+                    }
+                  }
+                  </style>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: center;"><label class="flex"> No Exiten Registros Ahorita</label></td>
                   </tr>
+                  @endforelse
+
                 </tbody>
               </table>
         </div>
@@ -106,6 +168,17 @@
       </div>
       <div class="modal-body">
 
+        <form method="POST" action="{{route('guardar_ux')}}" enctype="multipart/form-data" >
+          @csrf
+          
+          @if (isset($proyectos))
+          
+          @foreach($proyectos as $pro)
+          <input class="form-control" type="hidden" name="idpro" value="{{Auth::user()->id_proyecto_select}}">
+          @endforeach
+          
+          @endif
+
 <div class="row">
   <div class="col-md-3">
 <label for="Nombre">Nombre</label>
@@ -115,12 +188,35 @@
     <label for="clave">Clave</label>
     <input type="text" name="clave" class="form-control">
   </div>
+
   <div class="col-md-6">
-    <label for="documento">Documento</label>
+    <label >
+    <div class="form-check form-check-inline">
+      <input id="my-input" class="form-check-input" type="radio" name="documento" value="archivo" onchange="radioSelec(this.value);">
+      <label for="my-input" class="form-check-label">Archivo</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input id="my-input" class="form-check-input" type="radio" name="documento" value="link" onchange="radioSelec(this.value);">
+      <label for="my-input" class="form-check-label">Link</label>
+    </div>
+  </label>
+
+  <div class="form-group" id="documento" style="display:none;">
     <input type="file" name="archivo" class="form-control">
     @error('archivo')
     <p class="form-text text-danger">{{ $message }}</p>
      @enderror
+  </div>
+
+  <div class="form-group" id="enlace" style="display:none;">
+    <input type="text" name="link" class="form-control">
+    @error('link')
+    <p class="form-text text-danger">{{ $message }}</p>
+     @enderror
+  </div>
+
+
+
   </div>
 </div>
 <div class="row">
@@ -133,11 +229,16 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: rgb(160, 47, 160); color:white;">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        @if (isset($proyectos))  
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        @else
+        <button type="submit" class="btn btn-primary" disabled><abbr title="No hay Proyecto Seleccionado"> Guardar</button>
+        @endif
       </div>
     </div>
   </div>
 </div>
+</form>
 
 @stop
 
@@ -161,6 +262,29 @@
        }
     });
   });
+
+
+  function radioSelec(dato){
+    if (dato == "archivo") {
+    document.getElementById("documento").style.display = "block";
+    document.getElementById("enlace").style.display = "none";
+  }
+  if (dato == "link") {
+    document.getElementById("documento").style.display = "none";
+    document.getElementById("enlace").style.display = "block";
+  }
+  }
 </script>
+
+@else
+ <div class="card-body">
+    <div style="text-align : center; ">
+        <img src="{{ asset('/logos/axo.png') }}" width="30%" height="30%">
+</div>
+<div>
+    <h1 style="margin-right: 0px; margin-left: 0px; margin-top: 10px; text-align : center;">No hay un Proyecto Seleccionado..¡¡</h1>
+</div>
+ </div>
+@endif
 
 @stop

@@ -14,7 +14,7 @@ class GrabacionesController extends Controller
     }
     
     public function vista_videos(){
-        $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->get();
+        $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->first();
         $grabaciones=DB::table('grabaciones')->select("*")->get();
         return view('Grabaciones.Video',compact('proyectos','grabaciones'));
      }

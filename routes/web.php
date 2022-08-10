@@ -73,7 +73,7 @@ Route::delete('/grabaciones/{id}/delete', [GrabacionesController::class,'delete_
 
 //uxs
 Route::get('/UXS', [UXController::class,'vista_ux'])->name('ux');
-Route::post('/Save_ux', [UXController::class,'guardar_ux'])->name('guardar_ux');
+Route::post('/saveUx', [UXController::class,'guardar_ux'])->name('guardar_ux');
 Route::get('/ux/{uuid}/download', [UXController::class,'descargar_ux'])->name('descargar_ux');
 Route::delete('/ux/{id}/delete', [UXController::class,'delete_ux'])->name('eliminar_ux');
 

@@ -14,7 +14,7 @@ class UIController extends Controller
     }
     
     public function vista_ui(){
-        $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->get();
+        $proyectos=DB::table("proyectos")->where('id',Auth::user()->id_proyecto_select)->first();
         return view('UI.Ui',compact('proyectos'));
      }
 }
