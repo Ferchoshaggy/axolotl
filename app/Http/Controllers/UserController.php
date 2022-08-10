@@ -37,7 +37,7 @@ class UserController extends Controller
                 File::delete($rute_fotos);
             }
             //guardamos la nueva
-            $foto = $time.''.rand(11111,99999).'foto'.$foto_delete->id.'.png'; 
+            $foto = $time.''.rand(11111,99999).'foto'.$foto_delete->id.$request['foto']->getClientOriginalExtension(); 
             $destinationPath = public_path().'/fotos_users';
             $file_image = $request->file('foto');
             $file_image->move($destinationPath,$foto);

@@ -59,6 +59,7 @@ Route::post('/agregar_sprints', [MatrizController::class,'agregar_sprints'])->na
 Route::post('/actualizar_sprint', [MatrizController::class,'actualizar_sprint'])->name('actualizar_sprint');
 Route::delete('/eliminar_sprint', [MatrizController::class,'eliminar_sprint'])->name('eliminar_sprint');
 Route::delete('/eliminar_modulo', [MatrizController::class,'eliminar_modulo'])->name('eliminar_modulo');
+Route::get('/Visor_PDF', [MatrizController::class,'visor_pdf'])->name('visor_pdf');
 
 //documetnacion
 Route::get('/Documentos', [DocumentosController::class,'vista_documentos'])->name('documentos');
