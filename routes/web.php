@@ -12,6 +12,7 @@ use App\Http\Controllers\UXController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\SearchesController;
+use App\Http\Controllers\CustomerAccessController;
 
 
 
@@ -41,6 +42,8 @@ Route::put('/selec_proy/{id}', [DashController::class,'seleccionar_proyecto'])->
 //searches
 Route::get('/Search_Sprint/{id}', [SearchesController::class,'search_sprint'])->name('search_sprint');
 Route::get('/Search_Modulo/{id}', [SearchesController::class,'search_modulo'])->name('search_modulo');
+Route::get('/Search_Sprint_for_Modulo/{id}', [SearchesController::class,'search_sprint_for_modulo'])->name('search_sprint_for_modulo');
+
 
 //avance
 Route::get('/Avance', [AvanceController::class,'vista_avance'])->name('Avance');
@@ -90,3 +93,13 @@ Route::post('/guardarPresupuesto', [PresupuestoController::class,'save_presupues
 
 //check list
 Route::get('/Check_List', [CheckController::class,'vista_check_list'])->name('check_list');
+Route::post('/Guardar_Preguntas', [CheckController::class,'guardar_preguntas'])->name('guardar_preguntas');
+Route::post('/Generar_Link', [CheckController::class,'generar_link'])->name('generar_link');
+Route::post('/Actualizar_Link', [CheckController::class,'actualizar_link'])->name('actualizar_link');
+Route::get('/PDF_Check_List', [CheckController::class,'PDF_check_list'])->name('PDF_check_list');
+Route::delete('/Eliminar_Check_List', [CheckController::class,'eliminar_check_list'])->name('eliminar_check_list');
+
+//Customer Access
+Route::get('/Check_List_Question/{id_link}', [CustomerAccessController::class,'encuesta_check_list'])->name('encuesta_check_list');
+Route::post('/Envio_Cliente', [CustomerAccessController::class,'envio_cliente'])->name('envio_cliente');
+Route::get('/Question_Ok', [CustomerAccessController::class,'gracias_contestar'])->name('gracias_contestar');
