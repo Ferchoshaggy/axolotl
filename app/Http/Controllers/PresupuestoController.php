@@ -19,28 +19,20 @@ class PresupuestoController extends Controller
         $presupuestos=DB::table('presupuestos')->select('*')->get();
         $modulos=DB::table("modulos")->where('id_proyecto',Auth::user()->id_proyecto_select)->get();
         $sprints=DB::table("sprints")->select("*")->get();
-
-        //opereaciones para mostrar
-        $pre=DB::table('presupuestos')->where('id_proyecto',Auth::user()->id_proyecto_select)->first();
-        $egresosD=DB::table('dinamico_egresos')->where('id_presupuesto',$pre->id)->selectRaw('sum(egreso) as egresos')->first();
-        
-        $costoD=($pre->costo * $pre->sprints);
-
-        $totalEgresos=($pre->egreso + $egresosD->egresos);
-        $gananciaI=round(($pre->costo - $totalEgresos) / $pre->integrantes,2);
-        
-
+       $dinamico= DB::table('dinamico_egresos')->select("*")->get();
+       
+    
         //sacar semanas de una fecha a otra
         $fecha1 = new DateTime($proyectos->fecha);
         $fecha2 = new DateTime($proyectos->entrega);
         $semanas= $fecha1->diff($fecha2);
         $calcular=floor($semanas->format('%a') / 7);
 
-        //ganancias semanal
-        $gananciaS=round($gananciaI / $calcular);
-      
 
-       return view('Presupuestos.Presupuesto',compact('proyectos','presupuestos','modulos','sprints','calcular','costoD','totalEgresos','gananciaI','gananciaS'));
+
+        return view('Presupuestos.Presupuesto',compact('proyectos','presupuestos','modulos','sprints','calcular'));
+  
+       
      }
      public function save_presupuesto(Request $request){
         $request->validate([
