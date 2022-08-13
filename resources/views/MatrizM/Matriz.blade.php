@@ -25,7 +25,6 @@
   }
 
   .boton_rosa{
-        margin:0 3% 0 0; 
         background:rgb(235, 75, 235); 
         color:white;
         font-weight: bold;

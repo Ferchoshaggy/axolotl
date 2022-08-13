@@ -112,7 +112,11 @@
                         $sumatoria_sprints+=$sprint->porcentaje;
                     }
                 }
-                $divicion=$sumatoria_sprints/$numero_sprints;
+                if($numero_sprints==0){
+                    $divicion = 0;
+                }else{
+                    $divicion = $sumatoria_sprints / $numero_sprints;
+                }
                 $porcentaje_por_modulo_unitario=($divicion*$porcentaje_por_modulo)/$porcentaje_por_modulo;
                 $suma_porcentaje_por_modulo_unitario+=$porcentaje_por_modulo_unitario;
                 //impresion de datos

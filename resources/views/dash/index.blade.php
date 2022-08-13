@@ -9,7 +9,6 @@
 @section('content')
     <style type="text/css">
         .boton_rosa {
-            margin: 0 3% 0 0;
             background: rgb(235, 75, 235);
             color: white;
             font-weight: bold;
@@ -18,6 +17,13 @@
         .boton_rosa:hover {
             background-color: rgb(165, 48, 165);
             color: white;
+        }
+        li{
+            transition: .6s;
+        }
+        li:hover{
+            font-size: 18px;
+            transition: .6s;
         }
     </style>
 
@@ -56,7 +62,7 @@
                         </button>
                     </div>
                     <div class="modal-body" style="text-align: center;">
-                        <p style="color: black; white-space: pre-wrap; font-weight: bold; font-size: 35px;">SE GUARDO CON
+                        <p style="color: black; font-weight: bold; font-size: 35px;">SE GUARDO CON
                             EXITO</p><br>
                     </div>
                     <div class="modal-footer">
