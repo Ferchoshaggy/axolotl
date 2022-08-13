@@ -19,21 +19,26 @@ class PresupuestoController extends Controller
         $presupuestos=DB::table('presupuestos')->select('*')->get();
         $modulos=DB::table("modulos")->where('id_proyecto',Auth::user()->id_proyecto_select)->get();
         $sprints=DB::table("sprints")->select("*")->get();
-       $dinamico= DB::table('dinamico_egresos')->select("*")->get();
-       
-    
+        $dinamico= DB::table('dinamico_egresos')->select("*")->get();
+
         //sacar semanas de una fecha a otra
+        if(isset($proyectos)){
         $fecha1 = new DateTime($proyectos->fecha);
         $fecha2 = new DateTime($proyectos->entrega);
         $semanas= $fecha1->diff($fecha2);
         $calcular=floor($semanas->format('%a') / 7);
-
-
-
-        return view('Presupuestos.Presupuesto',compact('proyectos','presupuestos','modulos','sprints','calcular'));
-  
        
-     }
+        return view('Presupuestos.Presupuesto',compact('proyectos','presupuestos','modulos','sprints','calcular'));
+
+    }else{
+
+        return view('Presupuestos.Presupuesto',compact('proyectos','presupuestos','modulos','sprints'));
+    }
+    
+        
+    } 
+    
+     
      public function save_presupuesto(Request $request){
         $request->validate([
             'costo'=>'required',
