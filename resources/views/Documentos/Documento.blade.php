@@ -194,14 +194,14 @@
 
                                 <div class="col-md-4">
                                     <label for="Fecha">Fecha de Recibido</label>
-                                    <input type="date" name="fecha" class="form-control">
+                                    <input type="date" name="fecha" class="form-control" value="{{old('fecha')}}">
                                     @error('fecha')
                                         <p class="form-text text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-md-8">
                                     <label for="documento">Documento</label>
-                                    <input type="file" name="archivo" class="form-control">
+                                    <input type="file" name="archivo" class="form-control" value="{{old('archivo')}}">
                                     @error('archivo')
                                         <p class="form-text text-danger">{{ $message }}</p>
                                     @enderror
@@ -210,7 +210,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="Descripcion">Descripcion</label>
-                                    <textarea name="descripcion" class="form-control"></textarea>
+                                    <textarea name="descripcion" class="form-control">{{old('nombre')}}</textarea>
                                     @error('descripcion')
                                         <p class="form-text text-danger">{{ $message }}</p>
                                     @enderror

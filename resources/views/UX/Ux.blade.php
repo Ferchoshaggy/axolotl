@@ -203,11 +203,17 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="Nombre">Nombre</label>
-                                    <input type="text" name="nombre" class="form-control">
+                                    <input type="text" name="nombre" class="form-control" value="{{old('nombre')}}">
+                                    @error('nombre')
+                                            <p class="form-text text-danger">{{ $message }}</p>
+                                        @enderror
                                 </div>
                                 <div class="col-md-3">
                                     <label for="clave">Clave</label>
-                                    <input type="text" name="clave" class="form-control">
+                                    <input type="number" name="clave" step="0.01" class="form-control" value="{{old('clave')}}">
+                                    @error('clave')
+                                            <p class="form-text text-danger">{{ $message }}</p>
+                                        @enderror
                                 </div>
 
                                 <div class="col-md-6">
@@ -225,14 +231,14 @@
                                     </label>
 
                                     <div class="form-group" id="documento" style="display:none;">
-                                        <input type="file" name="archivo" class="form-control">
+                                        <input type="file" name="archivo" class="form-control" value="{{old('archivo')}}">
                                         @error('archivo')
                                             <p class="form-text text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
 
                                     <div class="form-group" id="enlace" style="display:none;">
-                                        <input type="text" name="link" class="form-control">
+                                        <input type="text" name="link" class="form-control" value="{{old('link')}}">
                                         @error('link')
                                             <p class="form-text text-danger">{{ $message }}</p>
                                         @enderror
@@ -243,7 +249,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="Descripcion">Descripcion</label>
-                                    <textarea name="descripcion" class="form-control"></textarea>
+                                    <textarea name="descripcion" class="form-control">{{old('descripcion')}}</textarea>
+                                    @error('descripcion')
+                                            <p class="form-text text-danger">{{ $message }}</p>
+                                        @enderror
                                 </div>
                             </div>
 

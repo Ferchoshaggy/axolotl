@@ -56,8 +56,7 @@
                         </button>
                     </div>
                     <div class="modal-body" style="text-align: center;">
-                        <p style="color: black; white-space: pre-wrap; font-weight: bold; font-size: 35px;">SE GUARDO CON
-                            EXITO</p><br>
+                        <p style="color: black; white-space: pre-wrap; font-weight: bold; font-size: 35px;">SE GUARDO CON EXITO</p><br>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn boton_rosa" data-dismiss="modal">ACEPTAR</button>

@@ -80,12 +80,13 @@ Route::delete('/ux/{id}/delete', [UXController::class,'delete_ux'])->name('elimi
 
 //uis
 Route::get('/UIS', [UIController::class,'vista_ui'])->name('ui');
-Route::post('/Save_ui', [UIController::class,'guardar_ui'])->name('guardar_ui');
+Route::post('/saveui', [UIController::class,'guardar_ui'])->name('guardar_ui');
 Route::get('/ui/{uuid}/download', [UIController::class,'descargar_ui'])->name('descargar_ui');
 Route::delete('/ui/{id}/delete', [UIController::class,'delete_ui'])->name('eliminar_ui');
 
 //presupuesto
 Route::get('/Presupuesto', [PresupuestoController::class,'vista_presupuesto'])->name('presupuesto');
+Route::post('/guardarPresupuesto', [PresupuestoController::class,'save_presupuesto'])->name('guardar_presupuesto');
 
 //check list
 Route::get('/Check_List', [CheckController::class,'vista_check_list'])->name('check_list');

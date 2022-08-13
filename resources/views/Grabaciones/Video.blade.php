@@ -159,14 +159,14 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label for="link">Link</label>
-                                    <input type="text" name="link" class="form-control">
+                                    <input type="text" name="link" class="form-control" value="{{old('link')}}">
                                     @error('link')
                                         <p class="form-text text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-md-4">
                                     <label for="Fecha">Fecha de Grabacion</label>
-                                    <input type="date" name="fecha" class="form-control">
+                                    <input type="date" name="fecha" class="form-control" value="{{old('fecha')}}">
                                     @error('fecha')
                                         <p class="form-text text-danger">{{ $message }}</p>
                                     @enderror
@@ -175,7 +175,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="Descripcion">Descripcion</label>
-                                    <textarea name="descripcion" class="form-control"></textarea>
+                                    <textarea name="descripcion" class="form-control">{{old('descripcion')}}</textarea>
                                     @error('descripcion')
                                         <p class="form-text text-danger">{{ $message }}</p>
                                     @enderror

@@ -18,13 +18,15 @@ class DashController extends Controller
 
     public function guardar_proyecto(Request $request){
         echo $request;
+        $time = date("Y-m-d");
         DB::table("proyectos")->insert([
 
             "nombre"=>$request['nombre_proyecto'],
             "entrega"=>$request['fecha_entrega'],
             "cliente"=>$request['cliente'],
             "contacto"=>$request['contacto'],
-            "descripcion"=>$request['description_proyecto']
+            "descripcion"=>$request['description_proyecto'],
+            "fecha"=>$time,
 
         ]);
         //para pasarlo al modelo o modelos

@@ -18,7 +18,7 @@ class CreateUxesTable extends Migration
             $table->unsignedBigInteger('id_proyecto');
             $table->foreign("id_proyecto")->references("id")->on("proyectos")->onDelete("cascade");
             $table->string('nombre');
-            $table->string('clave');
+            $table->double('clave');
             $table->string('archivo')->nullable();
             $table->string('link')->nullable();
             $table->text('descripcion');

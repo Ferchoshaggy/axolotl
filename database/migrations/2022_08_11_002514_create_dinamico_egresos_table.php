@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProyectosTable extends Migration
+class CreateDinamicoEgresosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateProyectosTable extends Migration
      */
     public function up()
     {
-        Schema::create('proyectos', function (Blueprint $table) {
+        Schema::create('dinamico_egresos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->date('entrega');
-            $table->string('cliente');
-            $table->string('contacto');
-            $table->text('descripcion');
-            $table->date('fecha');
+            $table->unsignedBigInteger('id_presupuesto');
+            $table->foreign("id_presupuesto")->references("id")->on("presupuestos")->onDelete("cascade");
+            $table->float('egreso');
+            $table->text('concepto');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateProyectosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proyectos');
+        Schema::dropIfExists('dinamico_egresos');
     }
 }
