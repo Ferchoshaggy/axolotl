@@ -3,6 +3,47 @@
 @section('title', 'Grabaciones')
 
 @section('content_header')
+
+<style type="text/css">
+
+  li{
+    transition: .6s;
+  }
+  li:hover{
+    font-size: 18px;
+    transition: .6s;
+  }
+
+  .boton_rosa{
+        background:rgb(235, 75, 235); 
+        color:white;
+        font-weight: bold;
+    }
+    .boton_rosa:hover{
+        background-color:rgb(165, 48, 165); 
+        color:white;
+    }
+
+  .marca{
+    transition: 1s;
+  }
+  .marca:hover{
+    background: #DBDBDB;
+    transition: 1s;
+  }
+
+  .boton_morado{
+    background: rgb(160, 90, 220); 
+    color:white;
+  }
+
+  .boton_morado:hover{
+    background: rgb(122, 62, 174); 
+    color:white;
+  }
+
+</style>
+
     <div>
         <h1>
             <center>GRABACIONES</center>
@@ -47,8 +88,8 @@
                         <tbody>
                             @forelse($grabaciones as $gra)
                                 @if (Auth::user()->id_proyecto_select == $gra->id_proyecto)
-                                    <tr>
-                                        <th style="text-align: center;">{{ $gra->fecha }}</th>
+                                    <tr class="marca">
+                                        <td style="text-align: center;">{{ $gra->fecha }}</td>
                                         <td style="text-align: center;">{{ $gra->link }}</td>
                                         <td style="text-align: center;">{{ $gra->descripcion }}</td>
                                         <td style="text-align: center;"><button class="btn"

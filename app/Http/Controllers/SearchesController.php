@@ -29,4 +29,16 @@ class SearchesController extends Controller
         $s_sprint_m=DB::table("sprints")->where("id_modulo",$id)->get();
         return json_encode($s_sprint_m);
     }
+
+    public function search_presupuesto($id){
+
+        $s_presupuesto=DB::table("presupuestos")->where("id",$id)->first();
+        return json_encode($s_presupuesto);
+    }
+
+    public function search_egresos($id){
+
+        $s_egresos=DB::table("dinamico_egresos")->where("id_presupuesto",$id)->get();
+        return json_encode($s_egresos);
+    }
 }
