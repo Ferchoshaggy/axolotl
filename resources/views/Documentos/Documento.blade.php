@@ -3,6 +3,46 @@
 @section('title', 'Documentos')
 
 @section('content_header')
+
+<style type="text/css">
+
+  li{
+    transition: .6s;
+  }
+  li:hover{
+    font-size: 18px;
+    transition: .6s;
+  }
+
+  .boton_rosa{
+        background:rgb(235, 75, 235); 
+        color:white;
+        font-weight: bold;
+    }
+    .boton_rosa:hover{
+        background-color:rgb(165, 48, 165); 
+        color:white;
+    }
+
+  .marca{
+    transition: 1s;
+  }
+  .marca:hover{
+    background: #DBDBDB;
+    transition: 1s;
+  }
+
+  .boton_morado{
+    background: rgb(160, 90, 220); 
+    color:white;
+  }
+
+  .boton_morado:hover{
+    background: rgb(122, 62, 174); 
+    color:white;
+  }
+</style>
+
     <div>
         <h1>
             <center>DOCUMENTOS</center>
@@ -76,18 +116,18 @@
                     <table class="table">
                         <thead style="background:rgb(245, 187, 198); color:black;">
                             <tr>
-                                <th scope="col" style="text-align: center;">Fecha</th>
-                                <th scope="col" style="text-align: center;">Nombre</th>
-                                <th scope="col" style="text-align: center;">Descripcion</th>
-                                <th scope="col" style="text-align: center;">Eliminar</th>
-                                <th scope="col" style="text-align: center;">Descargar</th>
+                                <th style="text-align: center;">Fecha</th>
+                                <th style="text-align: center;">Nombre</th>
+                                <th style="text-align: center;">Descripcion</th>
+                                <th style="text-align: center;">Eliminar</th>
+                                <th style="text-align: center;">Descargar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($documentos as $doc)
                                 @if (Auth::user()->id_proyecto_select == $doc->id_proyecto)
-                                    <tr>
-                                        <th style="text-align: center;">{{ $doc->fecha }}</th>
+                                    <tr class="marca">
+                                        <td style="text-align: center;">{{ $doc->fecha }}</td>
                                         <td style="text-align: center;">{{ $doc->nombre }}</td>
                                         <td style="text-align: center;">{{ $doc->descripcion }}</td>
                                         <td style="text-align: center;"><button class="btn"

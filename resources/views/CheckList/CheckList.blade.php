@@ -139,7 +139,7 @@
         <tbody>
           @forelse($check_lists as $check_list)
           @if($check_list->tipo==1)
-          <tr>
+          <tr class="marca">
             <td style="text-align: center;">{{$check_list->prueba}}</td>
             <td style="text-align: center;">{{$check_list->caracteristicas}}</td>
             <td style="text-align: center;">{{$check_list->funciona}}</td>
@@ -215,7 +215,7 @@
 
           @forelse($check_lists as $check_list)
           @if($check_list->tipo==2)
-          <tr>
+          <tr class="marca">
             <td style="text-align: center;">{{$check_list->prueba}}</td>
             <td style="text-align: center;">{{$check_list->caracteristicas}}</td>
             <td style="text-align: center;">{{$check_list->funciona}}</td>
@@ -290,7 +290,7 @@
 
           @forelse($check_lists as $check_list)
           @if($check_list->tipo==3)
-          <tr>
+          <tr class="marca">
             <td style="text-align: center;">{{$check_list->prueba}}</td>
             <td style="text-align: center;">{{$check_list->caracteristicas}}</td>
             <td style="text-align: center;">{{$check_list->funciona}}</td>

@@ -43,6 +43,8 @@ Route::put('/selec_proy/{id}', [DashController::class,'seleccionar_proyecto'])->
 Route::get('/Search_Sprint/{id}', [SearchesController::class,'search_sprint'])->name('search_sprint');
 Route::get('/Search_Modulo/{id}', [SearchesController::class,'search_modulo'])->name('search_modulo');
 Route::get('/Search_Sprint_for_Modulo/{id}', [SearchesController::class,'search_sprint_for_modulo'])->name('search_sprint_for_modulo');
+Route::get('/search_presupuesto/{id}', [SearchesController::class,'search_presupuesto'])->name('search_presupuesto');
+Route::get('/search_egresos/{id}', [SearchesController::class,'search_egresos'])->name('search_egresos');
 
 
 //avance
@@ -90,6 +92,8 @@ Route::delete('/ui/{id}/delete', [UIController::class,'delete_ui'])->name('elimi
 //presupuesto
 Route::get('/Presupuesto', [PresupuestoController::class,'vista_presupuesto'])->name('presupuesto');
 Route::post('/guardarPresupuesto', [PresupuestoController::class,'save_presupuesto'])->name('guardar_presupuesto');
+Route::post('/actualizar_presupuesto', [PresupuestoController::class,'actualizar_presupuesto'])->name('actualizar_presupuesto');
+Route::get('/pdf_presupusto', [PresupuestoController::class,'pdf_presupusto'])->name('pdf_presupusto');
 
 //check list
 Route::get('/Check_List', [CheckController::class,'vista_check_list'])->name('check_list');
