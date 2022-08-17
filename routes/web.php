@@ -14,9 +14,6 @@ use App\Http\Controllers\DashController;
 use App\Http\Controllers\SearchesController;
 use App\Http\Controllers\CustomerAccessController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,8 +28,6 @@ use App\Http\Controllers\CustomerAccessController;
 Route::get('/', function () {
     return view('auth.login');
 });
-
-
 
 //dash
 Route::get('/dash', [DashController::class,'vista_dash'])->name('vista_dash');
