@@ -15,8 +15,14 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        
+        <link rel="icon" type="image/jpg" href="{{url('favicon.ico')}}"/>
     </head>
-    <body class="font-sans antialiased" style="background: #24252a">
+    <div id="particles-js" style="width: 100%; height: 100vh; position: fixed; z-index: -1;"></div>
+    <body class="font-sans antialiased" style="background: #24252a" >
         {{ $slot }}
     </body>
 </html>
+
+<script src="js/particles.min.js"></script>
+<script src="js/activar.js"></script>
